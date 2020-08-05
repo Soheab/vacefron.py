@@ -1,5 +1,5 @@
-# Vacefron.py
-A Wrapper for Vacefron.nl/api written in Python.
+# VACEfron.py
+A Wrapper for [vacefron.nl/api](https://vacefron.nl/api/) written in Python.
 
 
 # Requirements
@@ -23,4 +23,4 @@ See the full and detailed [docs here](https://github.com/Soheab/vacefron.py/blob
 This wrapper is made by Soheab_#6240, contact me on discord for anything related to this wrapper.
 
 You can join my Discord [server here](https://discord.gg/yCzcfju) or 
-Vacefron's [server here](https://discord.gg/TtR32WT) to report any bugs or suggestions.
+VAC Efron's [server here](https://discord.gg/TtR32WT) to report any bugs or suggestions.
