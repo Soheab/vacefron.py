@@ -125,14 +125,14 @@ class Client:
         return Image(url, self._session)
 
     async def rank_card(self, username: str, avatar: str, level: int, rank: int, current_xp: int,
-                        next_level_xp: int, previous_level_xp: int, custom_bg: str = None, xp_color: str = None,
-                        is_boosting: bool = False) -> Image:
+                        next_level_xp: int, previous_level_xp: int, custom_background: str = None,
+                        xp_color: str = None, is_boosting: bool = False) -> Image:
         username = _parse_text(str(username))
         url = f"?username={username}&avatar={avatar}&level={level}&rank={rank}&currentxp={current_xp}" \
               f"&nextlevelxp={next_level_xp}&previouslevelxp={previous_level_xp}"
 
-        if custom_bg is not None:
-            url += f"&custombg={custom_bg}" # default: # #FCBA41
+        if custom_background is not None:
+            url += f"&custombg={custom_background}"
         if xp_color is not None:
             if not search(r'^(?:[0-9a-fA-F]{3}){1,2}$', str(xp_color)):
                 raise BadRequest("Invalid HEX value. You're only allowed to enter HEX (0-9 & A-F)")

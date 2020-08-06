@@ -5,10 +5,10 @@ with open('README.md') as f:
 
 setup(
     name = 'vacefron.py',
-    description = 'A Wrapper for Vacefron.nl/api written in Python.',
+    description = 'A Wrapper for vacefron.nl/api written in Python.',
     long_description = readme,
     long_description_content_type = 'text/markdown',
-    version = '1.5.1',
+    version = '1.0.0',
     packages = ['vacefron'],
     url = 'https://github.com/Soheab/vacefron.py',
     download_url = 'https://github.com/Soheab/vacefron.py/archive/v1.0.0.tar.gz',
