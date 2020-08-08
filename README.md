@@ -81,4 +81,4 @@ async def icanmilkyou(ctx, face: discord.Member, cow: discord.Member):
 This wrapper is made by **Soheab#6240**, DM me on Discord or [join my Server](https://discord.gg/yCzcfju) for anything 
 related to this wrapper.
  
-You can join VACEfron's [server here](https://discord.gg/TtR32WT) to suggests something for the API.
+You can join VAC Efron's [server here](https://discord.gg/xJ2HRxZ) to suggests something for the API.
