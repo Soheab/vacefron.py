@@ -39,12 +39,12 @@ def _parse_text(text: str) -> str:
 
 class Client:
 
-    def __init__(self) -> None:
-        self._session = ClientSession(loop = get_event_loop())
+    def __init__(self, session: ClientSession = None) -> None:
+        self.session = ClientSession(loop = get_event_loop()) or session
         self._api_url = "https://vacefron.nl/api"
 
     async def _check_url(self, url: str):  # return_response=False):
-        response = await self._session.get(url)
+        response = await self.session.get(url)
         if response.status == 200:
             return url
         elif response.status == 400:
@@ -61,7 +61,7 @@ class Client:
     # Json/URL
 
     async def discord_server(self, creator: bool = False) -> Tuple[Any, str]:
-        api = await self._session.get(self._api_url)
+        api = await self.session.get(self._api_url)
         support_server = (await api.json()).get("discord_server")
         if creator:
             return support_server, "https://discord.gg/yCzcfju"
@@ -73,56 +73,56 @@ class Client:
     async def car_reverse(self, text: str) -> Image:
         text = _parse_text(str(text))
         url = await self._check_url(f"{self._api_url}/carreverse?text={text}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def change_my_mind(self, text: str) -> Image:
         text = _parse_text(str(text))
         url = await self._check_url(f"{self._api_url}/changemymind?text={text}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def first_time(self, user: str) -> Image:
         url = await self._check_url(f"{self._api_url}/firsttime?user={user}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def grave(self, user: str) -> Image:
         url = await self._check_url(f"{self._api_url}/grave?user={user}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def iam_speed(self, user: str) -> Image:
         url = await self._check_url(f"{self._api_url}/iamspeed?user={user}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def i_can_milk_you(self, user: str, user2: str = None) -> Image:
         url = f"{self._api_url}/icanmilkyou?user1={user}"
         url = await self._check_url(url)
         if user2 is not None:
             url += f"&user2={user2}"
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def heaven(self, user: str) -> Image:
         url = await self._check_url(f"{self._api_url}/heaven?user={user}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def npc(self, text: str, text2: str) -> Image:
         url = await self._check_url(f"{self._api_url}/npc?text1={text}&text2={text2}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def stonks(self, user: str) -> Image:
         url = await self._check_url(f"{self._api_url}/stonks?user={user}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def table_flip(self, user: str) -> Image:
         url = await self._check_url(f"{self._api_url}/tableflip?user={user}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def water(self, text: str) -> Image:
         text = _parse_text(str(text))
         url = await self._check_url(f"{self._api_url}/water?text={text}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def wide(self, image: str) -> Image:
         url = await self._check_url(f"{self._api_url}/wide?image={image}")
-        return Image(url, self._session)
+        return Image(url, self.session)
 
     async def rank_card(self, username: str, avatar: str, level: int, rank: int, current_xp: int,
                         next_level_xp: int, previous_level_xp: int, custom_background: str = None,
@@ -142,8 +142,8 @@ class Client:
             url += f"&isboosting=true"
 
         actual_url = await self._check_url(f"{self._api_url}/rankcard{url}")
-        return Image(actual_url, self._session)
+        return Image(actual_url, self.session)
 
     async def close(self) -> None:
-        if not self._session.closed:
-            await self._session.close()
+        if not self.session.closed:
+            await self.session.close()
