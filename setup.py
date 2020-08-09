@@ -17,7 +17,7 @@ setup(
     install_requires = ['aiohttp'],
     keywords = ['vacefron', 'discord', 'api'],
     project_urls = {
-        "Discord":       "https://discord.gg/TtR32WT",
+        "Discord":       "https://discord.gg/xJ2HRxZ",
         "Source":        "https://github.com/Soheab/vacefron.py",
         "Documentation": "https://github.com/Soheab/vacefron.py/blob/master/docs.md",
         "Issue tracker": "https://github.com/Soheab/vacefron.py/issues",
