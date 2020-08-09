@@ -1,6 +1,6 @@
 # VACEfron.py | Docs
 A Wrapper for [vacefron.nl/api](https://vacefron.nl/api) written in Python.\
-For any questions and support, you can join [VAC Efron's server](https://discord.gg/TtR32WT)
+For any questions and support, you can join [VAC Efron's server](https://discord.gg/xJ2HRxZ)
 
 ## Getting Started:
 
