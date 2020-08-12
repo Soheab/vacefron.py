@@ -23,7 +23,7 @@ For future reference in this documentation: when referring to 'vac_api' we refer
 ## Using the wrapper:
 All available endpoints you can use.
 
-### await vac_api.rank_card(username, avatar,  level, rank, current_xp, next_level_xp, previous_level_xp, custom_bg, xp_color, is_boosting)
+### await vac_api.rank_card(username, avatar,  level, rank, current_xp, next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting)
 Generate a custom Rank card for Discord bots!
 
 **Parameters**:
@@ -34,7 +34,7 @@ Generate a custom Rank card for Discord bots!
 - current_xp `int` | The user's current XP amount.
 - next_level_xp `int` | The user's next XP amount.
 - previous_level_xp `int` | The user's previous XP amount.
-- custom_bg `string` | A optional background for the rank card.
+- custom_background `string` | A optional background for the rank card.
 - xp_color `string` | The color for the XP bar. Default to #FCBA41.
 - is_boosting `bool` | If True, a boost badge will be displayed next to user's name
 
