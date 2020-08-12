@@ -4,9 +4,7 @@ For any questions and support, you can join [VAC Efron's server](https://discord
 
 ## Getting Started:
 
-To begin with, you'll have
-===============================
- to install the package by doing one of the following commands:
+To begin with, you'll have to install the package by doing one of the following commands:
 - `pip install -U vacefron.py`
 - `python -m pip -U install vacefron.py`
  
@@ -17,14 +15,19 @@ import vacefron
 
 vac_api = vacefron.Client()
 ```
-For future reference in this documentation: when referring to 'vac_api' we refer to that above!
+
+For future reference in this documentation: when referring to 'vac_api' we refer to that above.
  
   
 ## Using the wrapper:
 All available endpoints you can use.
+All available endpoints you can use.
 
-### await vac_api.rank_card(username, avatar,  level, rank, current_xp, next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting)
-Generate a custom Rank card for Discord bots!
+### Rank card
+
+---
+#### await vac_api.rank_card(username, avatar,  level, rank, current_xp, next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting)
+Generate a Rank card for Discord bots!
 
 **Parameters**:
 - username `string` | The user's name.
@@ -35,15 +38,16 @@ Generate a custom Rank card for Discord bots!
 - next_level_xp `int` | The user's next XP amount.
 - previous_level_xp `int` | The user's previous XP amount.
 - custom_background `string` | A optional background for the rank card.
-- xp_color `string` | The color for the XP bar. Default to #FCBA41.
-- is_boosting `bool` | If True, a boost badge will be displayed next to user's name
+- xp_color `string` | The color for the XP bar. Defaults to #FCBA41.
+- is_boosting `bool` | If True, a boost badge will be displayed next to user's name. Defaults to False.
 
 **Return type**: [Image](docs.md#image "Image object attributes")
 
 ---
 ### await vac_api.car_reverse(text)
 Generate that "car reverse" meme with your own text.
-  
+
+
 **Parameters**:
 - text `string` | Your text.
 
@@ -88,7 +92,7 @@ Generate that "I am speed" meme with someone's avatar.
 ---
 ### await vac_api.i_can_milk_you(user, user2)
 Generate that "I can milk you" meme from Markiplier with someone's avatar.
-  
+
 **Parameters**:
 - user `string` | Avatar of user. ~~on Markiplier~~
 - user1 `string` | Avatar of user. ~~on the Cow~~

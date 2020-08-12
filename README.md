@@ -2,7 +2,6 @@
 [![Downloads](https://pepy.tech/badge/vacefron-py)](https://pepy.tech/project/vacefron-py)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
-
 # VACEfron.py
 A Wrapper for [vacefron.nl/api](https://vacefron.nl/api/) written in Python.
 
@@ -26,7 +25,7 @@ See the changelog for each [version here](https://github.com/Soheab/vacefron.py/
 
 # Examples
 
-Generate a [Rank card](https://github.com/Soheab/vacefron.py/blob/master/docs.md#await-vac_apirank_cardusername-avatar--level-rank-current_xp-next_level_xp-previous_level_xp-custom_background-xp_color-is_boosting) with [discord.py](https://github.com/Rapptz/discord.py):
+Generate a [Rank card](docs.md#rank-card) with [discord.py](https://github.com/Rapptz/discord.py):
 ```python
 import vacefron
 import json
@@ -42,7 +41,7 @@ async def rank(ctx):
     with open("ranks.json") as f:
         ranks = json.load(f)
 
-    info = ranks[f"{ctx.author.id}"]
+    info = ranks[str(ctx.author.id)]
     boosting = True if ctx.author.premium_since else False
     gen_card = await vac_api.rank_card(
         username = ctx.author,
@@ -54,15 +53,13 @@ async def rank(ctx):
         previous_level_xp = 50,
         is_boosting = boosting
         )
-    rank_bytes = await gen_card.read()
-    await ctx.send(f"{ctx.author.name}'s rank in {ctx.guild.name}",
-                   file = discord.File(rank_bytes, "rank.png")
-                   )
+    rank_image = discord.File(fp = await gen_card.read(), filename = f"{ctx.author}_rank.png")
+    await ctx.send(f"{ctx.author.name}'s rank in {ctx.guild.name}", file = rank_image)
 
 # is_boosting, custom_background and xp_color are optional, see more in the docs.
 ```
 
-[I can milk you meme](https://github.com/Soheab/vacefron.py/blob/master/docs.md#await-vac_apii_can_milk_youuser-user2) with [discord.py](https://github.com/Rapptz/discord.py):
+[I can milk you meme](docs.md#await-vac_apii_can_milk_youuser-user2) with [discord.py](https://github.com/Rapptz/discord.py):
 ```python
 import vacefron
 import discord
@@ -73,9 +70,9 @@ vac_api = vacefron.Client()
 
 @bot.command()
 async def icanmilkyou(ctx, face: discord.Member, cow: discord.Member):
-    yes = await vac_api.i_can_milk_you(face.avatar_url, cow.avatar_url)
-    yes_bytes = discord.File(await yes.read(), "yes.png")
-    await ctx.send(file=yes_bytes)
+    meme = await vac_api.i_can_milk_you(face.avatar_url, cow.avatar_url)
+    meme_image = discord.File(fp = await meme.read(), filename = "let_me_milk_you.png")
+    await ctx.send(file=meme_image)
 ```
 
 # Made by

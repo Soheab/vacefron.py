@@ -33,7 +33,7 @@ def _parse_text(text: str) -> str:
         "^": "%CB%86",
         "_": "%5F",
         "©": "%C2%A9"
-        }
+    }
     return text.translate(str.maketrans(replacements))
 
 
