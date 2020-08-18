@@ -69,11 +69,11 @@ class Client:
 
     # Image
 
-    async def distracted_bf(self, boyfriend: str, woman: str, girlfriend: str) -> Image:
+    async def distracted_bf(self, boyfriend: str, girlfriend: str, woman: str) -> Image:
         url = f"{self._api_url}/distractedbf" \
               f"?boyfriend={boyfriend}" \
-              f"&woman={woman}" \
-              f"&girlfriend={girlfriend}"
+              f"&girlfriend={girlfriend}" \
+              f"&woman={woman}"
 
         url = await self._check_url(url)
         return Image(url, self.session)

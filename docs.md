@@ -37,6 +37,7 @@ Generate a Rank card for Discord bots!
 - current_xp `int` | The user's current XP amount.
 - next_level_xp `int` | The user's next XP amount.
 - previous_level_xp `int` | The user's previous XP amount.
+
 - custom_background `string` | A optional background for the rank card.
 - xp_color `string` | The color for the XP bar. Defaults to #FCBA41.
 - is_boosting `bool` | If True, a boost badge will be displayed next to user's name. Defaults to False.
@@ -44,13 +45,13 @@ Generate a Rank card for Discord bots!
 **Return type**: [Image](docs.md#image "Image object attributes")
 
 ---
-#### await vac_api.distracted_bf(boyfriend, woman, girlfriend)
+### await vac_api.distracted_bf(boyfriend, girlfriend, woman)
 Generate that "distracted boyfriend" meme with your images.
 
 **Parameters**:
 - boyfriend `string` | Avatar of user.
-- woman `string` | Avatar of user.
 - girlfriend `string` | Avatar of user.
+- woman `string` | Avatar of user.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 

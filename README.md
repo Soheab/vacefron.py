@@ -37,26 +37,28 @@ bot = commands.Bot(command_prefix="!")
 vac_api = vacefron.Client()
 
 @bot.command()
-async def rank(ctx):
+async def rank(ctx, member: discord.Member):
+    member = member or ctx.author
     with open("ranks.json") as f:
         ranks = json.load(f)
 
-    info = ranks[str(ctx.author.id)]
-    boosting = True if ctx.author.premium_since else False
+    info = ranks[str(member.id)]
+    boosting = True if member.premium_since else False
     gen_card = await vac_api.rank_card(
-        username = ctx.author,
-        avatar = ctx.author.avatar_url,
+        username = member,
+        avatar = member.avatar_url_as(format="png"), # converting everything to png.
         level = int(info['level']),
         rank = int(info['rank']),
         current_xp = int(info['current_xp']),
         next_level_xp = 500,
         previous_level_xp = 50,
-        is_boosting = boosting
+        xp_color = "123456", # optional
+        is_boosting = boosting # optional
         )
     rank_image = discord.File(fp = await gen_card.read(), filename = f"{ctx.author}_rank.png")
     await ctx.send(f"{ctx.author.name}'s rank in {ctx.guild.name}", file = rank_image)
 
-# is_boosting, custom_background and xp_color are optional, see more in the docs.
+# custom_background, is_boosting and xp_color are optional, see more in the docs.
 ```
 
 [I can milk you meme](docs.md#await-vac_apii_can_milk_youuser-user2) with [discord.py](https://github.com/Rapptz/discord.py):
