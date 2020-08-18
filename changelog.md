@@ -2,7 +2,7 @@
 See here what changed or broke each version.
 
 ## v1.1.0
-- Added support for new endpoint `.distracted_bf()`. See the [Docs](docs.md#await-vac_apidistracted_bfboyfriend-woman-girlfriend) for it.
+- Added support for new endpoint `.distracted_bf()`. See the [Docs](docs.md#await-vac_apidistracted_bfboyfriend-girlfriend-woman) for it.
 - Renamed `image.py` to `classes.py`
 - Added a RankCard class, nothing interesting, keep using `.rank_card()`.
 
