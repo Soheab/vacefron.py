@@ -44,6 +44,17 @@ Generate a Rank card for Discord bots!
 **Return type**: [Image](docs.md#image "Image object attributes")
 
 ---
+#### await vac_api.distracted_bf(boyfriend, woman, girlfriend)
+Generate that "distracted boyfriend" meme with your images.
+
+**Parameters**:
+- boyfriend `string` | Avatar of user.
+- woman `string` | Avatar of user.
+- girlfriend `string` | Avatar of user.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
 ### await vac_api.car_reverse(text)
 Generate that "car reverse" meme with your own text.
 
