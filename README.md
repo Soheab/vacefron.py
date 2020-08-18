@@ -45,7 +45,7 @@ async def rank(ctx, member: discord.Member):
     info = ranks[str(member.id)]
     boosting = True if member.premium_since else False
     gen_card = await vac_api.rank_card(
-        username = member,
+        username = str(member),
         avatar = member.avatar_url_as(format="png"), # converting avatar to .png, including .gif
         level = int(info['level']),
         rank = int(info['rank']),
@@ -55,8 +55,8 @@ async def rank(ctx, member: discord.Member):
         xp_color = "123456", # optional
         is_boosting = boosting # optional
         )
-    rank_image = discord.File(fp = await gen_card.read(), filename = f"{ctx.author}_rank.png")
-    await ctx.send(f"{ctx.author.name}'s rank in {ctx.guild.name}", file = rank_image)
+    rank_image = discord.File(fp = await gen_card.read(), filename = f"{member.name}_rank.png")
+    await ctx.send(f"{member.name}'s rank in {ctx.guild.name}", file = rank_image)
 
 # custom_background, is_boosting and xp_color are optional, see more in the docs.
 ```
