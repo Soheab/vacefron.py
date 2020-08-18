@@ -46,7 +46,7 @@ async def rank(ctx, member: discord.Member):
     boosting = True if member.premium_since else False
     gen_card = await vac_api.rank_card(
         username = member,
-        avatar = member.avatar_url_as(format="png"), # converting everything to .png
+        avatar = member.avatar_url_as(format="png"), # converting avatar to .png, including .gif
         level = int(info['level']),
         rank = int(info['rank']),
         current_xp = int(info['current_xp']),
