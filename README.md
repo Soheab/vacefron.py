@@ -37,7 +37,7 @@ bot = commands.Bot(command_prefix="!")
 vac_api = vacefron.Client()
 
 @bot.command()
-async def rank(ctx, member: discord.Member):
+async def rank(ctx, member: discord.Member = None):
     member = member or ctx.author
     with open("ranks.json") as f:
         ranks = json.load(f)
