@@ -26,7 +26,7 @@ All available endpoints you can use.
 ### Rank card
 
 ---
-#### await vac_api.rank_card(username, avatar,  level, rank, current_xp, next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting)
+#### await vac_api.rank_card(username, avatar, level, rank, current_xp, next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting)
 Generate a Rank card for Discord bots!
 
 **Parameters**:
@@ -37,8 +37,7 @@ Generate a Rank card for Discord bots!
 - current_xp `int` | The user's current XP amount.
 - next_level_xp `int` | The user's next XP amount.
 - previous_level_xp `int` | The user's previous XP amount.
-
-- custom_background `string` | A optional background for the rank card.
+- custom_background `string` | An optional background for the rank card.
 - xp_color `string` | The color for the XP bar. Defaults to #FCBA41.
 - is_boosting `bool` | If True, a boost badge will be displayed next to user's name. Defaults to False.
 
@@ -177,12 +176,12 @@ Make someone's avatar a *little* bit wider.
 
 ---
 ### await vac_api.discord_server(creator)
-Get an invitation to the Vacefron's server (or and the creator of this wrapper.)
+Get an invitation to the VAC Efron's server (or and the creator of this wrapper.)
 
 **Parameters**:
 - creator `boolean` | To also get an invitation to the server of creator of this wrapper.
 
-**Return type**: string or tuple
+**Return type**: string or tuple when creator is True
 
 # Objects
 Here is explained what attributes the returned objects have
@@ -201,3 +200,48 @@ npc_meme = await vac_api.npc("ah yes", "no u")
 npc_bytes = await npc_meme.read() # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
 await ctx.send(file=discord.File(npc_bytes, filename="npc.png"))
 ```
+
+## RankCard
+This object gets returned from `.rank_card()`
+    
+#### RankCard.url
+The url of the card
+
+#### await RankCard.read()
+This will return a BytesIO object, which can be passed to discord.File() with a filename 
+for [discord.py](https://github.com/Rapptz/discord.py):
+```py
+card = await vac_api.rank_card(....)
+card_bytes = await card.read() # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
+await ctx.send(file=discord.File(card_bytes, filename="rank_card.png"))
+```
+
+#### RankCard.username
+The user's username, you provided but `#` replaced with `%23`
+
+#### RankCard.avatar
+The user's avatar, you provided
+
+#### RankCard.level
+The user's current level you provided
+
+#### RankCard.rank
+The user's position, you provided
+
+#### RankCard.current_xp
+The user's current XP amount, you provided
+
+#### RankCard.next_level_xp
+The user's next XP amount, you provided
+
+#### RankCard.previous_level_xp
+The user's previous XP amount, you provided
+
+#### RankCard.custom_background
+An optional background for the rank card, if you provided one else None
+
+#### RankCard.xp_color
+The color for the XP bar but `#` replaced with `%23`, if you provided one else None
+
+#### RankCard.is_boosting
+Bool, True if you set it to True else False

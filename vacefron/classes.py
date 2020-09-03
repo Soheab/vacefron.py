@@ -1,6 +1,8 @@
 from io import BytesIO
 from re import search
 
+from aiohttp import ClientSession
+
 from .errors import BadRequest
 
 
@@ -20,13 +22,14 @@ class Image:
 
 
 class RankCard:
-    __slots__ = ("username", "avatar", "level", "rank", "current_xp", "next_level_xp",
+    __slots__ = ("_session", "username", "avatar", "level", "rank", "current_xp", "next_level_xp",
                  "previous_level_xp", "custom_background", "xp_color", "is_boosting",
                  )
 
-    def __init__(self, username: str, avatar: str, level: int, rank: int, current_xp: int,
+    def __init__(self, _session: ClientSession, username: str, avatar: str, level: int, rank: int, current_xp: int,
                  next_level_xp: int, previous_level_xp: int, custom_background: str = None,
                  xp_color: str = None, is_boosting: bool = False) -> None:
+        self._session = _session
         self.username = username
         self.avatar = avatar
         self.level = level
@@ -40,6 +43,10 @@ class RankCard:
 
     def __str__(self) -> str:
         return f"https://vacefron.nl/api/rankcard{self.create_rank_card}"
+
+    async def read(self) -> BytesIO:
+        _bytes = await (await self._session.get(str(self))).read()
+        return BytesIO(_bytes)
 
     @property
     def create_rank_card(self) -> str:

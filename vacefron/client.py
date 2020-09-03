@@ -138,18 +138,19 @@ class Client:
     async def rank_card(
             self, username: str, avatar: str, level: int, rank: int, current_xp: int,
             next_level_xp: int, previous_level_xp: int, custom_background: str = None,
-            xp_color: str = None, is_boosting: bool = False) -> Image:
+            xp_color: str = None, is_boosting: bool = False) -> RankCard:
 
         username = _replace_characters(str(username))
         xp_color = str(xp_color).replace("#", "") if xp_color else None
 
         card = RankCard(
+                self.session,
                 username, avatar, level, rank, current_xp,
                 next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting
                 )
 
         await self._check_url(str(card))
-        return Image(str(card), self.session)
+        return card
 
     async def close(self) -> None:
         if not self.session.closed:
