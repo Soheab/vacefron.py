@@ -1,4 +1,5 @@
 from asyncio import get_event_loop
+from re import search, MULTILINE
 from typing import Any, Tuple
 
 from aiohttp import ClientSession
@@ -32,8 +33,12 @@ def _replace_characters(text: str) -> str:
         "^": "%CB%86",
         "_": "%5F",
         "©": "%C2%A9"
-        }
+    }
     return text.translate(str.maketrans(replacements))
+
+
+with open('alexflipnote/__init__.py') as f:
+    version = search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), MULTILINE).group(1)
 
 
 class Client:
@@ -43,7 +48,12 @@ class Client:
         self._api_url = "https://vacefron.nl/api"
 
     async def _check_url(self, url: str):
-        response = await self.session.get(str(url))
+        response = await self.session.get(
+            str(url),
+            headers = {
+                "User-Agent": f"VACEfron.py {version}"
+            }
+        )
         if response.status == 200:
             return url
         elif response.status == 400:
@@ -144,10 +154,10 @@ class Client:
         xp_color = str(xp_color).replace("#", "") if xp_color else None
 
         card = RankCard(
-                self.session,
-                username, avatar, level, rank, current_xp,
-                next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting
-                )
+            self.session,
+            username, avatar, level, rank, current_xp,
+            next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting
+        )
 
         await self._check_url(str(card))
         return card

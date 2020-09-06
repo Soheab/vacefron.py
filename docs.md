@@ -181,7 +181,62 @@ Get an invitation to the VAC Efron's server (or and the creator of this wrapper.
 **Parameters**:
 - creator `boolean` | To also get an invitation to the server of creator of this wrapper.
 
-**Return type**: string or tuple when creator is True
+**Return type**: string or tuple when `creator` is True
+
+# Examples
+See here some examples
+
+##### Generate a [Rank card](docs.md#rank-card) with [discord.py](https://github.com/Rapptz/discord.py):
+```python
+import vacefron
+import json
+import discord
+
+from discord.ext import commands
+
+bot = commands.Bot(command_prefix="!")
+vac_api = vacefron.Client()
+
+@bot.command()
+async def rank(ctx, member: discord.Member = None):
+    member = member or ctx.author
+    with open("ranks.json") as f:
+        ranks = json.load(f)
+
+    info = ranks[str(member.id)]
+    boosting = True if member.premium_since else False
+    gen_card = await vac_api.rank_card(
+        username = str(member),
+        avatar = member.avatar_url_as(format="png"), # converting avatar to .png, including .gif
+        level = int(info['level']),
+        rank = int(info['rank']),
+        current_xp = int(info['current_xp']),
+        next_level_xp = 500,
+        previous_level_xp = 50,
+        xp_color = "123456", # optional
+        is_boosting = boosting # optional
+        )
+    rank_image = discord.File(fp = await gen_card.read(), filename = f"{member.name}_rank.png")
+    await ctx.send(f"{member.name}'s rank in {ctx.guild.name}", file = rank_image)
+
+# custom_background, is_boosting and xp_color are optional, see more in the docs.
+```
+
+##### [I can milk you meme](docs.md#await-vac_apii_can_milk_youuser-user2) with [discord.py](https://github.com/Rapptz/discord.py):
+```python
+import vacefron
+import discord
+from discord.ext import commands
+
+bot = commands.Bot(command_prefix="!")
+vac_api = vacefron.Client()
+
+@bot.command()
+async def icanmilkyou(ctx, face: discord.Member, cow: discord.Member):
+    meme = await vac_api.i_can_milk_you(face.avatar_url, cow.avatar_url)
+    meme_image = discord.File(fp = await meme.read(), filename = "let_me_milk_you.png")
+    await ctx.send(file=meme_image)
+```
 
 # Objects
 Here is explained what attributes the returned objects have
