@@ -1,5 +1,6 @@
 from io import BytesIO
 from re import search
+from typing import Union
 
 from aiohttp import ClientSession
 
@@ -11,13 +12,15 @@ class Image:
     def __init__(self, url: str, session) -> None:
         self.url = url
         self.session = session
-        self._api_url = "https://vacefron.nl/api/"
 
     def __str__(self) -> str:
         return self.url if self.url is not None else ''
 
-    async def read(self) -> BytesIO:
+    async def read(self, bytesio = True) -> Union[bytes, BytesIO]:
         _bytes = await (await self.session.get(str(self.url))).read()
+        if bytesio is False:
+            return _bytes
+
         return BytesIO(_bytes)
 
 
@@ -44,8 +47,11 @@ class RankCard:
     def __str__(self) -> str:
         return f"https://vacefron.nl/api/rankcard{self.create_rank_card}"
 
-    async def read(self) -> BytesIO:
+    async def read(self, bytesio = True) -> Union[bytes, BytesIO]:
         _bytes = await (await self._session.get(str(self))).read()
+        if bytesio is False:
+            return _bytes
+
         return BytesIO(_bytes)
 
     @property

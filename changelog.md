@@ -3,15 +3,19 @@ See here what changed or broke each version.
 
 ---
 
-### v1.1.2 - September 6, 2020
-- Added "User-Agent"
-- Better README.md
-- Added examples to docs.md
-- Added dates to changelog.md
+### v1.2.0 - October 1, 2020
+- Added support for new endpoints: 
+        [.emergency_meeting()](docs.md#await-vac_apiemergency_meetingtext) and
+        [.ejected()](docs.md#await-alex_apiejectedname-crewmate-imposter) .
+- Better README.md.
+- Added examples to docs.md.
+- Added dates to changelog.md.
+- Now using urllib.parse to parse text.
+- Added `bytesio=True` to `Image.read()` set it to False if you want the bytes returned instead of an io.BytesIO object.
 
 ### v1.1.1 - September 3, 2020
 - `.rank_card()` now returns a [RankCard](docs.md#rankcard) object, so you can access the provided attributes, see
- them in the [docs](docs.md). `.read()` should still work the same
+ them in the [docs](docs.md). `.read()` should still work the same.
 
 ### v1.1.0 - August 18, 2020
 - Added support for new endpoint `.distracted_bf()`. See the [Docs](docs.md#await-vac_apidistracted_bfboyfriend-girlfriend-woman) for it.

@@ -21,7 +21,6 @@ For future reference in this documentation: when referring to 'vac_api' we refer
   
 ## Using the wrapper:
 All available endpoints you can use.
-All available endpoints you can use.
 
 ### Rank card
 
@@ -41,7 +40,7 @@ Generate a Rank card for Discord bots!
 - xp_color `string` | The color for the XP bar. Defaults to #FCBA41.
 - is_boosting `bool` | If True, a boost badge will be displayed next to user's name. Defaults to False.
 
-**Return type**: [Image](docs.md#image "Image object attributes")
+**Return type**: [RankCard](docs.md#rankcard "RankCard object attributes")
 
 ---
 ### await vac_api.distracted_bf(boyfriend, girlfriend, woman)
@@ -70,6 +69,30 @@ Generate that "change my mind" meme with your own text.
   
 **Parameters**:
 - text `string` | Your text.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
+### await vac_api.emergency_meeting(text)
+Generate your own "Emergency Meeting" Meme!
+  
+**Parameters**:
+- text `string` | The reason to call an emergency meeting.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
+### await alex_api.ejected(name, crewmate, imposter)
+Create your own custom "... Was ~~not~~ The Imposter" image!
+
+**Available colors:** `black`, `blue`, `brown`, `cyan`, `darkgreen`, `lime`,
+                       `orange`, `pink`, `purple`, `red`, `white`, `yellow`, `random`
+  
+**Parameters**:
+- name `string` | Name of the person that got ejected.
+- name `string` | Color of the person that got ejected, see **Available colors**. `random` will be a random color
+ from above. `Defauls to red`
+- imposter `string` | Determine if the person was the imposter or not. `Defaults to False`
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
@@ -248,13 +271,16 @@ This object gets returned from every endpoint.
 The url of the image
 
 #### await Image.read()
-This will return a BytesIO object, which can be passed to discord.File() with a filename 
+This will return a [io.BytesIO](https://docs.python.org/3/library/io.html#binary-i-o) object, 
+which can be passed to discord.File() with a filename 
 for [discord.py](https://github.com/Rapptz/discord.py):
 ```py
 npc_meme = await vac_api.npc("ah yes", "no u")
 npc_bytes = await npc_meme.read() # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
 await ctx.send(file=discord.File(npc_bytes, filename="npc.png"))
 ```
+\
+You can set `bytesio` to `False` if you want the bytes instead of an `io.BytesIO` object.
 
 ## RankCard
 This object gets returned from `.rank_card()`
@@ -263,13 +289,16 @@ This object gets returned from `.rank_card()`
 The url of the card
 
 #### await RankCard.read()
-This will return a BytesIO object, which can be passed to discord.File() with a filename 
+This will return a [io.BytesIO](https://docs.python.org/3/library/io.html#binary-i-o) object, 
+which can be passed to discord.File() with a filename 
 for [discord.py](https://github.com/Rapptz/discord.py):
 ```py
 card = await vac_api.rank_card(....)
 card_bytes = await card.read() # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
 await ctx.send(file=discord.File(card_bytes, filename="rank_card.png"))
 ```
+\
+You can set `bytesio` to `False` if you want the bytes instead of an `io.BytesIO` object.
 
 #### RankCard.username
 The user's username, you provided but `#` replaced with `%23`

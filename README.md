@@ -27,4 +27,4 @@ See the full and detailed [docs here](docs.md)
 This wrapper is made by **Soheab#6240**, DM me on Discord or join [my server here](https://discord.gg/yCzcfju) for anything 
 related to this wrapper.
  
-You can join VAC Efron's [server here](https://discord.gg/xJ2HRxZ) to suggest or report anything on the API.
+You can join [VAC Efron's server here](https://discord.gg/xJ2HRxZ) to suggest or report anything on the API.
