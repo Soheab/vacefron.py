@@ -3,10 +3,14 @@ See here what changed or broke each version.
 
 ---
 
+### v1.2.1 - October 6, 2020
+- changed param `imposter` of `.ejected()` to `impostor`, imposter still exists but use new one instead.
+- `custom_background` param of `.rank_card()`  can now accept a hex value instead of an image.
+
 ### v1.2.0 - October 1, 2020
 - Added support for new endpoints: 
         [.emergency_meeting()](docs.md#await-vac_apiemergency_meetingtext) and
-        [.ejected()](docs.md#await-alex_apiejectedname-crewmate-imposter) .
+        [.ejected()](docs.md#await-alex_apiejectedname-crewmate-impostor) .
 - Better README.md.
 - Added examples to docs.md.
 - Added dates to changelog.md.

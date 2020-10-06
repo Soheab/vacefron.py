@@ -36,7 +36,7 @@ Generate a Rank card for Discord bots!
 - current_xp `int` | The user's current XP amount.
 - next_level_xp `int` | The user's next XP amount.
 - previous_level_xp `int` | The user's previous XP amount.
-- custom_background `string` | An optional background for the rank card.
+- custom_background `string` | An optional image or color for the background.
 - xp_color `string` | The color for the XP bar. Defaults to #FCBA41.
 - is_boosting `bool` | If True, a boost badge will be displayed next to user's name. Defaults to False.
 
@@ -74,7 +74,7 @@ Generate that "change my mind" meme with your own text.
 
 ---
 ### await vac_api.emergency_meeting(text)
-Generate your own "Emergency Meeting" Meme!
+Generate your own Among Us "Emergency Meeting" Meme!
   
 **Parameters**:
 - text `string` | The reason to call an emergency meeting.
@@ -82,8 +82,8 @@ Generate your own "Emergency Meeting" Meme!
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
-### await alex_api.ejected(name, crewmate, imposter)
-Create your own custom "... Was ~~not~~ The Imposter" image!
+### await alex_api.ejected(name, crewmate, impostor)
+Create your own custom Among Us "... Was ~~not~~ The impostor" image!
 
 **Available colors:** `black`, `blue`, `brown`, `cyan`, `darkgreen`, `lime`,
                        `orange`, `pink`, `purple`, `red`, `white`, `yellow`, `random`
@@ -92,7 +92,7 @@ Create your own custom "... Was ~~not~~ The Imposter" image!
 - name `string` | Name of the person that got ejected.
 - name `string` | Color of the person that got ejected, see **Available colors**. `random` will be a random color
  from above. `Defauls to red`
-- imposter `string` | Determine if the person was the imposter or not. `Defaults to False`
+- impostor `string` | Determine if the person was the impostor or not. `Defaults to False`
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
@@ -236,7 +236,7 @@ async def rank(ctx, member: discord.Member = None):
         current_xp = int(info['current_xp']),
         next_level_xp = 500,
         previous_level_xp = 50,
-        xp_color = "123456", # optional
+        xp_color = "666666", # optional
         is_boosting = boosting # optional
         )
     rank_image = discord.File(fp = await gen_card.read(), filename = f"{member.name}_rank.png")

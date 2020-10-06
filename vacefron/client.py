@@ -62,8 +62,10 @@ class Client:
         url = await self._check_url(f"{self._api_url}/emergencymeeting?text={quote(text)}")
         return Image(url, self.session)
 
-    async def ejected(self, name: str, crewmate: str = None, imposter: bool = False) -> Image:
-        crewmate = crewmate or "red"
+    async def ejected(self, name: str, crewmate: str = "red",
+                      impostor: bool = False, imposter: None = False) -> Image:
+        if imposter is True:
+            impostor = True
         crewmate_colors = [
             'black', 'blue', 'brown', 'cyan', 'darkgreen', 'lime',
             'orange', 'pink', 'purple', 'red', 'white', 'yellow',
@@ -75,7 +77,7 @@ class Client:
                 f"{self._api_url}/ejected"
                 f"?name={quote(name)}"
                 f"&crewmate={crewmate.lower()}"
-                f"&imposter={imposter}"
+                f"&impostor={impostor}"
                 )
         return Image(url, self.session)
 
@@ -128,6 +130,7 @@ class Client:
             next_level_xp: int, previous_level_xp: int, custom_background: str = None,
             xp_color: str = None, is_boosting: bool = False) -> RankCard:
 
+        custom_background = str(custom_background).replace("#", "") if custom_background else None
         xp_color = str(xp_color).replace("#", "") if xp_color else None
 
         card = RankCard(
