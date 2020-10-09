@@ -2,6 +2,11 @@
 See here what changed or broke each version.
 
 ---
+### v1.2.2 - October 9, 2020
+- Fix TypeError from `urllib.parse.quote()`.
+- Stop using `urllib.parse.quote()` on an image url.
+- Fix `.npc()`.
+- `str()` everything.
 
 ### v1.2.1 - October 6, 2020
 - changed param `imposter` of `.ejected()` to `impostor`, imposter still exists but use new one instead.

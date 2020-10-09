@@ -43,29 +43,31 @@ class Client:
 
     async def distracted_bf(self, boyfriend: str, girlfriend: str, woman: str) -> Image:
         url = f"{self._api_url}/distractedbf" \
-              f"?boyfriend={boyfriend}" \
-              f"&girlfriend={girlfriend}" \
-              f"&woman={woman}"
+              f"?boyfriend={str(boyfriend)}" \
+              f"&girlfriend={str(girlfriend)}" \
+              f"&woman={str(woman)}"
 
         url = await self._check_url(url)
         return Image(url, self.session)
 
     async def car_reverse(self, text: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/carreverse?text={quote(text)}")
+        url = await self._check_url(f"{self._api_url}/carreverse?text={quote(str(text))}")
         return Image(url, self.session)
 
     async def change_my_mind(self, text: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/changemymind?text={quote(text)}")
+        url = await self._check_url(f"{self._api_url}/changemymind?text={quote(str(text))}")
         return Image(url, self.session)
 
     async def emergency_meeting(self, text: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/emergencymeeting?text={quote(text)}")
+        url = await self._check_url(f"{self._api_url}/emergencymeeting?text={quote(str(text))}")
         return Image(url, self.session)
 
     async def ejected(self, name: str, crewmate: str = "red",
-                      impostor: bool = False, imposter: None = False) -> Image:
+                      impostor: bool = False, imposter: bool = False) -> Image:
         if imposter is True:
             impostor = True
+        if imposter is False:
+            impostor = False
         crewmate_colors = [
             'black', 'blue', 'brown', 'cyan', 'darkgreen', 'lime',
             'orange', 'pink', 'purple', 'red', 'white', 'yellow',
@@ -75,54 +77,54 @@ class Client:
             crewmate = choose(crewmate_colors)
         url = await self._check_url(
                 f"{self._api_url}/ejected"
-                f"?name={quote(name)}"
+                f"?name={quote(str(name))}"
                 f"&crewmate={crewmate.lower()}"
                 f"&impostor={impostor}"
                 )
         return Image(url, self.session)
 
     async def first_time(self, user: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/firsttime?user={quote(user)}")
+        url = await self._check_url(f"{self._api_url}/firsttime?user={str(user)}")
         return Image(url, self.session)
 
     async def grave(self, user: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/grave?user={quote(user)}")
+        url = await self._check_url(f"{self._api_url}/grave?user={str(user)}")
         return Image(url, self.session)
 
     async def iam_speed(self, user: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/iamspeed?user={quote(user)}")
+        url = await self._check_url(f"{self._api_url}/iamspeed?user={str(user)}")
         return Image(url, self.session)
 
     async def i_can_milk_you(self, user: str, user2: str = None) -> Image:
-        url = f"{self._api_url}/icanmilkyou?user1={quote(user)}"
+        url = f"{self._api_url}/icanmilkyou?user1={str(user)}"
         if user2 is not None:
-            url += f"&user2={quote(user2)}"
+            url += f"&user2={str(user)}"
 
         url = await self._check_url(url)
         return Image(url, self.session)
 
     async def heaven(self, user: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/heaven?user={quote(user)}")
+        url = await self._check_url(f"{self._api_url}/heaven?user={str(user)}")
         return Image(url, self.session)
 
     async def npc(self, text: str, text2: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/npc?{quote(text)}&text2={quote(text2)}")
+        url = await self._check_url(f"{self._api_url}/npc?text1={quote(str(text))}&text2={quote(str(text2))}")
         return Image(url, self.session)
 
     async def stonks(self, user: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/stonks?user={quote(user)}")
+        url = await self._check_url(f"{self._api_url}/stonks?user={str(user)}")
         return Image(url, self.session)
 
     async def table_flip(self, user: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/tableflip?user={quote(user)}")
+        url = await self._check_url(f"{self._api_url}/tableflip?user={str(user)}")
         return Image(url, self.session)
 
     async def water(self, text: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/water?text={quote(text)}")
+        url = await self._check_url(f"{self._api_url}/water?text={quote(str(text))}")
         return Image(url, self.session)
 
     async def wide(self, image: str) -> Image:
-        url = await self._check_url(f"{self._api_url}/wide?image={image}")
+        url = await self._check_url(f"{self._api_url}/wide?image={str(image)}")
         return Image(url, self.session)
 
     async def rank_card(
@@ -135,7 +137,7 @@ class Client:
 
         card = RankCard(
                 self.session,
-                quote(username), avatar, level, rank, current_xp,
+                quote(str(username)), str(avatar), level, rank, current_xp,
                 next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting
                 )
 
