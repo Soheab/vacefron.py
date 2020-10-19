@@ -82,7 +82,7 @@ Generate your own Among Us "Emergency Meeting" Meme!
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
-### await alex_api.ejected(name, crewmate, impostor)
+### await vac_api.ejected(name, crewmate, impostor)
 Create your own custom Among Us "... Was ~~not~~ The impostor" image!
 
 **Available colors:** `black`, `blue`, `brown`, `cyan`, `darkgreen`, `lime`,
