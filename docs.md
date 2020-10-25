@@ -82,17 +82,18 @@ Generate your own Among Us "Emergency Meeting" Meme!
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
-### await alex_api.ejected(name, crewmate, impostor)
+### await vac_api.ejected(name, crewmate, impostor)
 Create your own custom Among Us "... Was ~~not~~ The impostor" image!
 
 **Available colors:** `black`, `blue`, `brown`, `cyan`, `darkgreen`, `lime`,
-                       `orange`, `pink`, `purple`, `red`, `white`, `yellow`, `random`
+                       `orange`, `pink`, `purple`, `red`, `white`, `yellow`, `random`,
+                       [CrewMateColors enum](docs.md#crewmatecolors), number from 1 to 13.
   
 **Parameters**:
 - name `string` | Name of the person that got ejected.
-- name `string` | Color of the person that got ejected, see **Available colors**. `random` will be a random color
- from above. `Defauls to red`
-- impostor `string` | Determine if the person was the impostor or not. `Defaults to False`
+- crewmate `string` | Color of the person that got ejected, see Available colors. `This is optional and defaults to
+ red`
+- impostor `string` | Determine if the person was the impostor or not. `This is optional and defaults to False`
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
@@ -153,11 +154,12 @@ Generate that "npc" meme with your own text.
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
-### await vac_api.stonks(user)
+### await vac_api.stonks(user, not_stonks)
 Generate that "Stonks 〽" meme with someone's avatar.
   
 **Parameters**:
 - user `string` | Avatar of user.
+- not_stonks `bool` | Determine if it was Stonks or Not Stonks. Defaults to False.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
@@ -245,7 +247,7 @@ async def rank(ctx, member: discord.Member = None):
 # custom_background, is_boosting and xp_color are optional, see more in the docs.
 ```
 
-##### [I can milk you meme](docs.md#await-vac_apii_can_milk_youuser-user2) with [discord.py](https://github.com/Rapptz/discord.py):
+##### [ejected](docs.md#await-vac_apiejectedname-crewmate-impostor) with [discord.py](https://github.com/Rapptz/discord.py):
 ```python
 import vacefron
 import discord
@@ -255,10 +257,10 @@ bot = commands.Bot(command_prefix="!")
 vac_api = vacefron.Client()
 
 @bot.command()
-async def icanmilkyou(ctx, face: discord.Member, cow: discord.Member):
-    meme = await vac_api.i_can_milk_you(face.avatar_url, cow.avatar_url)
-    meme_image = discord.File(fp = await meme.read(), filename = "let_me_milk_you.png")
-    await ctx.send(file=meme_image)
+async def eject(ctx, name, crewmate, impostor):
+    image = await vac_api.ejected(name, crewmate, impostor)
+    image_out = discord.File(fp = await image.read(), filename = "ejected.png")
+    await ctx.send(file=image_out)
 ```
 
 # Objects
@@ -329,3 +331,45 @@ The color for the XP bar but `#` replaced with `%23`, if you provided one else N
 
 #### RankCard.is_boosting
 Bool, True if you set it to True else False
+
+## CrewMateColors
+Enum for `.ejected()`.
+    
+### 1 or black
+Black color for the crewmate.
+
+#### 2 or blue
+Black color for the crewmate.
+
+#### 3 or brown
+Brown color for the crewmate.
+
+#### 4 or cyan
+Cyan color for the crewmate.
+
+#### 5 or darkgreen (or dark_green)
+Dark green color for the crewmate.
+
+#### 6 or lime
+Lime color for the crewmate.
+
+#### 7 or orange
+Orange color for the crewmate.
+
+#### 8 or pink
+Pink color for the crewmate.
+
+#### 9 or purple
+Purple color for the crewmate.
+
+#### 10 or red
+Red color for the crewmate.
+
+#### 11 or white
+White color for the crewmate.
+
+#### 12 or yellow
+Yellow color for the crewmate.
+
+#### 13 or random
+Random color from above for the crewmate.
