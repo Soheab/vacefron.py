@@ -2,6 +2,12 @@
 See here what changed or broke each version.
 
 ---
+
+### v1.3.0 - October 25, 2020
+- Added support for `not_stonks` for `.stonks()` endpoint. See more in [docs](docs.md#await-vac_apistonksuser-not_stonks).
+- Added [CrewMateColors enum](docs.md#crewmatecolors) for `.ejected()`
+- Added an optional `loop` param to `vacefron.Client()`
+
 ### v1.2.2 - October 9, 2020
 - Fix TypeError from `urllib.parse.quote()`.
 - Stop using `urllib.parse.quote()` on an image url.
