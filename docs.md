@@ -182,15 +182,6 @@ Generate that "water" meme with your own text.
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
-### await vac_api.change_my_mind(text)
-Generate that "change my mind" meme with your own text.
-  
-**Parameters**:
-- text `string` | Your text.
-
-**Return type:** [Image](docs.md#image "Image object attributes")
-
----
 ### await vac_api.wide(text)
 Make someone's avatar a *little* bit wider.
   
