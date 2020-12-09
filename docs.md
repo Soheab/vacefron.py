@@ -1,13 +1,15 @@
 # VACEfron.py | Docs
+
 A Wrapper for [vacefron.nl/api](https://vacefron.nl/api) written in Python.\
 For any questions and support, you can join [VAC Efron's server](https://discord.gg/xJ2HRxZ)
 
 ## Getting Started:
 
 To begin with, you'll have to install the package by doing one of the following commands:
+
 - `pip install -U vacefron.py`
 - `python -m pip -U install vacefron.py`
- 
+
 After that, you will have to create the client:
 
 ```python
@@ -17,18 +19,21 @@ vac_api = vacefron.Client()
 ```
 
 For future reference in this documentation: when referring to 'vac_api' we refer to that above.
- 
-  
+
 ## Using the wrapper:
+
 All available endpoints you can use.
 
 ### Rank card
 
 ---
-#### await vac_api.rank_card(username, avatar, level, rank, current_xp, next_level_xp, previous_level_xp, custom_background, xp_color, is_boosting)
+
+#### await vac_api.rank_card(username, avatar, level, rank, current_xp, next_level_xp, previous_level_xp, custom_background = None, xp_color = None, is_boosting = False)
+
 Generate a Rank card for Discord bots!
 
 **Parameters**:
+
 - username `string` | The user's name.
 - avatar `string` | The user's avatar
 - level `int` | The user's current level.
@@ -36,17 +41,35 @@ Generate a Rank card for Discord bots!
 - current_xp `int` | The user's current XP amount.
 - next_level_xp `int` | The user's next XP amount.
 - previous_level_xp `int` | The user's previous XP amount.
-- custom_background `string` | An optional image or color for the background.
-- xp_color `string` | The color for the XP bar. Defaults to #FCBA41.
+- custom_background `string` | An optional image url or hex color for the background.
+- xp_color `string` | The hex color for the XP bar. Defaults to #FCBA41.
 - is_boosting `bool` | If True, a boost badge will be displayed next to user's name. Defaults to False.
 
 **Return type**: [RankCard](docs.md#rankcard "RankCard object attributes")
 
 ---
+
+### await vac_api.batman_slap(text, text2, batman=None, robin=None)
+
+Generate that batman slapping meme with custom texts and images.
+
+**Parameters**:
+
+- text `string` | Text 1.
+- text2 `string` | Text 2.
+- batman `string` | Optional avatar for Batman.
+- robin `string` | Optional avatar for Robin.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
+
 ### await vac_api.distracted_bf(boyfriend, girlfriend, woman)
+
 Generate that "distracted boyfriend" meme with your images.
 
 **Parameters**:
+
 - boyfriend `string` | Avatar of user.
 - girlfriend `string` | Avatar of user.
 - woman `string` | Avatar of user.
@@ -54,155 +77,213 @@ Generate that "distracted boyfriend" meme with your images.
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.car_reverse(text)
+
 Generate that "car reverse" meme with your own text.
 
-
 **Parameters**:
+
 - text `string` | Your text.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.change_my_mind(text)
+
 Generate that "change my mind" meme with your own text.
-  
+
 **Parameters**:
+
 - text `string` | Your text.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.emergency_meeting(text)
+
 Generate your own Among Us "Emergency Meeting" Meme!
-  
+
 **Parameters**:
+
 - text `string` | The reason to call an emergency meeting.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
-### await vac_api.ejected(name, crewmate, impostor)
+
+### await vac_api.ejected(name, crewmate = CrewMateColors.RED, impostor = False)
+
 Create your own custom Among Us "... Was ~~not~~ The impostor" image!
 
 **Available colors:** `black`, `blue`, `brown`, `cyan`, `darkgreen`, `lime`,
-                       `orange`, `pink`, `purple`, `red`, `white`, `yellow`, `random`,
-                       [CrewMateColors enum](docs.md#crewmatecolors), number from 1 to 13.
-  
+`orange`, `pink`, `purple`, `red`, `white`, `yellow`, `random`,
+[CrewMateColors enum](docs.md#crewmatecolors), number from 1 to 13.
+
 **Parameters**:
+
 - name `string` | Name of the person that got ejected.
-- crewmate `string` | Color of the person that got ejected, see Available colors. `This is optional and defaults to
- red`
-- impostor `string` | Determine if the person was the impostor or not. `This is optional and defaults to False`
+- crewmate `string` | Color of the person that got ejected, see Available colors. This is optional and defaults to color
+  red
+- impostor `string` | Determine if the person was the impostor or not. This is optional and defaults to False
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.first_time(user)
+
 Generate that "first time" meme with someone's avatar.
-  
+
 **Parameters**:
+
 - user `string` | Avatar of user.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.grave(user)
+
 Generate a Grave stone with someone's avatar.
-  
+
 **Parameters**:
+
 - user `string` | Avatar of user.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.iam_speed(user)
+
 Generate that "I am speed" meme with someone's avatar.
-  
+
 **Parameters**:
+
 - user `string` | Avatar of user.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
-### await vac_api.i_can_milk_you(user, user2)
+
+### await vac_api.i_can_milk_you(user, user2 = None)
+
 Generate that "I can milk you" meme from Markiplier with someone's avatar.
 
 **Parameters**:
+
 - user `string` | Avatar of user. ~~on Markiplier~~
-- user1 `string` | Avatar of user. ~~on the Cow~~
+- user1 `string` | Optional Avatar of user. ~~on the Cow~~
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.heaven(user)
+
 Generate that heaven meme with someone's avatar.
-  
+
 **Parameters**:
+
 - user `string` | Avatar of user.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.npc(text, text2)
+
 Generate that "npc" meme with your own text.
-  
+
 **Parameters**:
+
 - text `string` | Your text.
 - text2 `string` | Your text.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.stonks(user, not_stonks)
+
 Generate that "Stonks 〽" meme with someone's avatar.
-  
+
 **Parameters**:
+
 - user `string` | Avatar of user.
 - not_stonks `bool` | Determine if it was Stonks or Not Stonks. Defaults to False.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.table_flip(user)
+
 Generate that "Table flip" meme with someone's avatar.
-  
+
 **Parameters**:
+
 - user `string` | Avatar of user.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.water(user)
+
 Generate that "water" meme with your own text.
-  
+
 **Parameters**:
+
 - text `string` | Your Text
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
 ### await vac_api.wide(text)
+
 Make someone's avatar a *little* bit wider.
-  
+
 **Parameters**:
+
 - user `string` | Avatar of user.
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 
 ---
+
+### await vac_api.wolverine(user)
+
+Generate that "wolverine looking at a picture" meme with your own avatar.
+
+**Parameters**:
+
+- user `string` | Avatar of user.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
+
 ### await vac_api.discord_server(creator)
+
 Get an invitation to the VAC Efron's server (or and the creator of this wrapper.)
 
 **Parameters**:
+
 - creator `boolean` | To also get an invitation to the server of creator of this wrapper.
 
 **Return type**: string or tuple when `creator` is True
 
 # Examples
+
 See here some examples
 
 ##### Generate a [Rank card](docs.md#rank-card) with [discord.py](https://github.com/Rapptz/discord.py):
+
 ```python
 import vacefron
 import json
@@ -210,8 +291,9 @@ import discord
 
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix = "!")
 vac_api = vacefron.Client()
+
 
 @bot.command()
 async def rank(ctx, member: discord.Member = None):
@@ -222,145 +304,180 @@ async def rank(ctx, member: discord.Member = None):
     info = ranks[str(member.id)]
     boosting = True if member.premium_since else False
     gen_card = await vac_api.rank_card(
-        username = str(member),
-        avatar = member.avatar_url_as(format="png"), # converting avatar to .png, including .gif
-        level = int(info['level']),
-        rank = int(info['rank']),
-        current_xp = int(info['current_xp']),
-        next_level_xp = 500,
-        previous_level_xp = 50,
-        xp_color = "666666", # optional
-        is_boosting = boosting # optional
-        )
+            username = str(member),
+            avatar = member.avatar_url_as(format = "png"),  # converting avatar to .png, including .gif
+            level = int(info['level']),
+            rank = int(info['rank']),
+            current_xp = int(info['current_xp']),
+            next_level_xp = 500,
+            previous_level_xp = 50,
+            xp_color = "666666",  # optional
+            is_boosting = boosting  # optional
+            )
     rank_image = discord.File(fp = await gen_card.read(), filename = f"{member.name}_rank.png")
     await ctx.send(f"{member.name}'s rank in {ctx.guild.name}", file = rank_image)
 
 # custom_background, is_boosting and xp_color are optional, see more in the docs.
 ```
 
-##### [ejected](docs.md#await-vac_apiejectedname-crewmate-impostor) with [discord.py](https://github.com/Rapptz/discord.py):
+##### [ejected](docs.md#await-vac_apiejectedname-crewmate--crewmatecolorsred-impostor--false) with [discord.py](https://github.com/Rapptz/discord.py):
+
 ```python
 import vacefron
 import discord
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix = "!")
 vac_api = vacefron.Client()
+
 
 @bot.command()
 async def eject(ctx, name, crewmate, impostor):
     image = await vac_api.ejected(name, crewmate, impostor)
     image_out = discord.File(fp = await image.read(), filename = "ejected.png")
-    await ctx.send(file=image_out)
+    await ctx.send(file = image_out)
 ```
 
 # Objects
+
 Here is explained what attributes the returned objects have
 
 ## Image
+
 This object gets returned from every endpoint.
-    
+
 #### Image.url
+
 The url of the image
 
 #### await Image.read()
-This will return a [io.BytesIO](https://docs.python.org/3/library/io.html#binary-i-o) object, 
-which can be passed to discord.File() with a filename 
-for [discord.py](https://github.com/Rapptz/discord.py):
+
+This will return a [io.BytesIO](https://docs.python.org/3/library/io.html#binary-i-o) object, which can be passed to
+discord.File() with a filename for [discord.py](https://github.com/Rapptz/discord.py):
+
 ```py
 npc_meme = await vac_api.npc("ah yes", "no u")
-npc_bytes = await npc_meme.read() # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
-await ctx.send(file=discord.File(npc_bytes, filename="npc.png"))
+npc_bytes = await npc_meme.read()  # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
+await ctx.send(file = discord.File(npc_bytes, filename = "npc.png"))
 ```
+
 \
 You can set `bytesio` to `False` if you want the bytes instead of an `io.BytesIO` object.
 
 ## RankCard
+
 This object gets returned from `.rank_card()`
-    
+
 #### RankCard.url
+
 The url of the card
 
 #### await RankCard.read()
-This will return a [io.BytesIO](https://docs.python.org/3/library/io.html#binary-i-o) object, 
-which can be passed to discord.File() with a filename 
-for [discord.py](https://github.com/Rapptz/discord.py):
+
+This will return a [io.BytesIO](https://docs.python.org/3/library/io.html#binary-i-o) object, which can be passed to
+discord.File() with a filename for [discord.py](https://github.com/Rapptz/discord.py):
+
 ```py
 card = await vac_api.rank_card(....)
-card_bytes = await card.read() # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
-await ctx.send(file=discord.File(card_bytes, filename="rank_card.png"))
+card_bytes = await card.read()  # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
+await ctx.send(file = discord.File(card_bytes, filename = "rank_card.png"))
 ```
+
 \
 You can set `bytesio` to `False` if you want the bytes instead of an `io.BytesIO` object.
 
 #### RankCard.username
+
 The user's username, you provided but `#` replaced with `%23`
 
 #### RankCard.avatar
+
 The user's avatar, you provided
 
 #### RankCard.level
+
 The user's current level you provided
 
 #### RankCard.rank
+
 The user's position, you provided
 
 #### RankCard.current_xp
+
 The user's current XP amount, you provided
 
 #### RankCard.next_level_xp
+
 The user's next XP amount, you provided
 
 #### RankCard.previous_level_xp
+
 The user's previous XP amount, you provided
 
 #### RankCard.custom_background
+
 An optional background for the rank card, if you provided one else None
 
 #### RankCard.xp_color
+
 The color for the XP bar but `#` replaced with `%23`, if you provided one else None
 
 #### RankCard.is_boosting
+
 Bool, True if you set it to True else False
 
 ## CrewMateColors
+
 Enum for `.ejected()`.
-    
+
 ### 1 or black
+
 Black color for the crewmate.
 
 #### 2 or blue
+
 Black color for the crewmate.
 
 #### 3 or brown
+
 Brown color for the crewmate.
 
 #### 4 or cyan
+
 Cyan color for the crewmate.
 
 #### 5 or darkgreen (or dark_green)
+
 Dark green color for the crewmate.
 
 #### 6 or lime
+
 Lime color for the crewmate.
 
 #### 7 or orange
+
 Orange color for the crewmate.
 
 #### 8 or pink
+
 Pink color for the crewmate.
 
 #### 9 or purple
+
 Purple color for the crewmate.
 
 #### 10 or red
+
 Red color for the crewmate.
 
 #### 11 or white
+
 White color for the crewmate.
 
 #### 12 or yellow
+
 Yellow color for the crewmate.
 
 #### 13 or random
+
 Random color from above for the crewmate.
