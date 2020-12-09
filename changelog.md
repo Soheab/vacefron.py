@@ -4,11 +4,11 @@ See here what changed or broke each version.
 
 ---
 
-### v1.2.0 - October 1, 2020
+### v1.4.0 - December 9, 2020
 
 - Added support for new endpoints:
   [.batman_slap()](docs.md#await-vac_apibatman_slaptext-text2-batmannone-robinnone) and
-  [.wolverine()](docs.md#await-vac_apiwolverineuser) .
+  [.wolverine()](docs.md#await-vac_apiwolverineuser) . See more in the docs.
 
 ### v1.3.0 - October 25, 2020
 
