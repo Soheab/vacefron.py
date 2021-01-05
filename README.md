@@ -26,11 +26,17 @@ See the full and detailed [docs here](docs.md)
 
 ## Links
 
-[API](https://vacefron.nl/api/) | [Changelogs](changelog.md) | [Examples](docs.md#examples)
+[API](https://vacefron.nl/api/) | [Changelogs](https://github.com/Soheab/vacefron.py/blob/master/changelog.md) | [Examples](https://github.com/Soheab/vacefron.py/blob/master/docs.md#examples)
 
 ## Made by
 
-This wrapper is made by **Soheab#6240**. DM me on Discord or join [my server here](https://discord.gg/yCzcfju) for
+This wrapper is made by **Soheab#6240**. DM me on Discord or join my server [here](https://discord.gg/yCzcfju) for
 anything related to this wrapper.
 
-You can join [VAC Efron's server here](https://discord.gg/xJ2HRxZ) to suggest or report anything on the API.
+You can join VAC Efron's server [here](https://discord.gg/xJ2HRxZ) to suggest or report anything on the API.
+
+## Other Wrappers
+
+- **Csharp:** [GitHub](https://github.com/VACEfron/VACEfron.NET) | [Nuget](https://www.nuget.org/packages/VACEfron.NET)
+- **Javascript:** [GitHub](https://github.com/Sidemen19/VACEfron.js) | [Npm](https://npmjs.com/package/vacefron)
+- **Java:** [GitHub](https://github.com/thunderstorm010/VACEfron4J)
