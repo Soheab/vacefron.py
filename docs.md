@@ -78,6 +78,18 @@ Generate that "distracted boyfriend" meme with your images.
 
 ---
 
+### await vac_api.dock_of_shame(user)
+
+Generate that "dock of shame" meme with your avatar.
+
+**Parameters**:
+
+- user `string` | Avatar of user.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
+
 ### await vac_api.car_reverse(text)
 
 Generate that "car reverse" meme with your own text.
@@ -263,6 +275,19 @@ Generate that "wolverine looking at a picture" meme with your own avatar.
 **Parameters**:
 
 - user `string` | Avatar of user.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
+
+### await vac_api.woman_yelling_at_cat(woman, cat)
+
+Generate that "woman yelling at cat" meme with your images.
+
+**Parameters**:
+
+- woman `string` | Avatar of user. ~~For woman.~~
+- cat `string` | Avatar of user. ~~For cat.~~
 
 **Return type:** [Image](docs.md#image "Image object attributes")
 

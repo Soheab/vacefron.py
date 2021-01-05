@@ -79,6 +79,11 @@ class Client:
                 "distractedbf", {"boyfriend": str(boyfriend), "girlfriend": str(girlfriend), "woman": str(woman)})
         return Image(str(response.url), response)
 
+    async def dock_of_shame(self, user: str) -> Image:
+        response = await self._api_request(
+                "dockofshame", {"user": str(user)})
+        return Image(str(response.url), response)
+
     async def car_reverse(self, text: str) -> Image:
         response = await self._api_request("carreverse", {"text": str(text)})
         return Image(str(response.url), response)
@@ -156,6 +161,10 @@ class Client:
         response = await self._api_request("wolverine", {"user": str(user)})
         return Image(str(response.url), response)
 
+    async def woman_yelling_at_cat(self, woman: str, cat: str) -> Image:
+        response = await self._api_request("womanyellingatcat", {"woman": str(woman), "cat": str(cat)})
+        return Image(str(response.url), response)
+
     async def rank_card(self, username: str, avatar: str, level: int, rank: int, current_xp: int, next_level_xp: int,
                         previous_level_xp: int, custom_background: str = None, xp_color: str = None,
                         is_boosting: bool = False) -> RankCard:
@@ -184,3 +193,15 @@ class Client:
     async def close(self) -> None:
         if not self.session.closed:
             await self.session.close()
+
+    # Aliases
+    womanyellingatcat = woman_yelling_at_cat
+    icanmilkyou = i_can_milk_you
+    iamspeed = iam_speed
+    emergencymeeting = emergency_meeting
+    changemymind = change_my_mind
+    carreverse = car_reverse
+    dockofshame = dock_of_shame
+    distractedbf = distracted_bf
+    batmanslap = batman_slap
+    firsttime = first_time
