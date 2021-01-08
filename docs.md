@@ -44,6 +44,7 @@ Generate a Rank card for Discord bots!
 - custom_background `string` | An optional image url or hex color for the background.
 - xp_color `string` | The hex color for the XP bar. Defaults to #FCBA41.
 - is_boosting `bool` | If True, a boost badge will be displayed next to user's name. Defaults to False.
+- circle_avatar `bool` | If True, the avatar will be rounded instead of a square. Defaults to False.
 
 **Return type**: [RankCard](docs.md#rankcard "RankCard object attributes")
 
@@ -323,26 +324,27 @@ vac_api = vacefron.Client()
 @bot.command()
 async def rank(ctx, member: discord.Member = None):
     member = member or ctx.author
-    with open("ranks.json") as f:
-        ranks = json.load(f)
+    with open('rank_stuff.json') as json_file:
+        data = json.load(json_file)
 
-    info = ranks[str(member.id)]
-    boosting = True if member.premium_since else False
+    user_rank = data[str(member.id)] # dict
     gen_card = await vac_api.rank_card(
-            username = str(member),
+            username = str(member),  # wrapper will handle the #
             avatar = member.avatar_url_as(format = "png"),  # converting avatar to .png, including .gif
-            level = int(info['level']),
-            rank = int(info['rank']),
-            current_xp = int(info['current_xp']),
-            next_level_xp = 500,
-            previous_level_xp = 50,
-            xp_color = "666666",  # optional
-            is_boosting = boosting  # optional
+            level = int(user_rank['level']),
+            rank = int(user_rank['rank']),
+            current_xp = int(user_rank['current_xp']),
+            next_level_xp = 500,  # you will need calculate this according the current_xp
+            previous_level_xp = 50,  # you will need calculate this according the current_xp
+            custom_background = str(user_rank["background"]), # optional
+            xp_color = str(user_rank["bar_color"]), # optional
+            is_boosting = bool(member.premium_since),  # optional
+            circle_avatar = True  # optional
             )
     rank_image = discord.File(fp = await gen_card.read(), filename = f"{member.name}_rank.png")
     await ctx.send(f"{member.name}'s rank in {ctx.guild.name}", file = rank_image)
 
-# custom_background, is_boosting and xp_color are optional, see more in the docs.
+# custom_background, is_boosting, xp_color and circle_avatar are optional kwargs, see more in the docs.
 ```
 
 ##### [ejected](docs.md#await-vac_apiejectedname-crewmate--crewmatecolorsred-impostor--false) with [discord.py](https://github.com/Rapptz/discord.py):

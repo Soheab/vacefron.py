@@ -3,6 +3,11 @@
 See here what changed or broke each version.
 
 ---
+### v1.5.1 - January 8, 2020
+
+- Added support for `circle_avatar` in [.rank_card()](docs.md#rank-card). See more in the docs.
+- Added one alias: `rankcard()` -> [`.rank_card()`](docs.md#rank-card)
+  
 ### v1.5.0 - January 5, 2020
 
 - Added support for new endpoints:

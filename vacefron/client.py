@@ -5,6 +5,7 @@ from re import search
 from typing import Tuple, Union
 from urllib.parse import quote, urlencode
 
+import discord
 from aiohttp import ClientSession
 
 from .classes import Image, RankCard, CrewMateColors
@@ -167,25 +168,25 @@ class Client:
 
     async def rank_card(self, username: str, avatar: str, level: int, rank: int, current_xp: int, next_level_xp: int,
                         previous_level_xp: int, custom_background: str = None, xp_color: str = None,
-                        is_boosting: bool = False) -> RankCard:
-
-        custom_background = str(custom_background) if custom_background else None
-        xp_color = str(xp_color).replace("#", "") if xp_color else None
+                        is_boosting: bool = False, circle_avatar: bool = False) -> RankCard:
 
         params = {
             "username": str(username), "avatar": str(avatar), "level": int(level), "rank": int(rank),
             "currentxp": int(current_xp), "nextlevelxp": int(next_level_xp), "previouslevelxp": int(previous_level_xp)
             }
+
         if custom_background:
-            params['custombg'] = str(custom_background).replace("#", "")
+            params['custombg'] = str(custom_background).strip("#")
         if xp_color:
-            if not search(r"^(?:[0-9a-fA-F]{3}){1,2}$", str(xp_color).replace("#", "")):
+            if not search(r"^(?:[0-9a-fA-F]{3}){1,2}$", str(xp_color).strip("#")):
                 raise BadRequest(
                         "Invalid HEX value. You're only allowed to enter HEX (0-9 & A-F)"
                         )
             params['xpcolor'] = str(xp_color).replace("#", "")
         if is_boosting:
             params['isboosting'] = bool(is_boosting)
+        if circle_avatar:
+            params['circleavatar'] = bool(circle_avatar)
 
         response = await self._api_request("rankcard", params)
         return RankCard(str(response.url), response, params)
@@ -205,3 +206,4 @@ class Client:
     distractedbf = distracted_bf
     batmanslap = batman_slap
     firsttime = first_time
+    rankcard = rank_card

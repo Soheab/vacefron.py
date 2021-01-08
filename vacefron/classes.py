@@ -23,12 +23,12 @@ class Image:
 
 class RankCard:
     __slots__ = ("url", "_response", "_params", "username", "avatar", "level", "rank", "current_xp", "next_level_xp",
-                 "previous_level_xp", "custom_background", "xp_color", "is_boosting")
+                 "previous_level_xp", "custom_background", "xp_color", "is_boosting", "circle_avatar")
 
     def __init__(self, url, response, params) -> None:
         self.url = url
-        self._response = response
-        self._params = params
+        self._response: ClientResponse = response
+        self._params: dict = params
         self.username: str = params.get("username")
         self.avatar: str = params.get("avatar")
         self.level: int = params.get("level")
@@ -39,6 +39,7 @@ class RankCard:
         self.custom_background: str = params.get("custombg", None)
         self.xp_color: str = params.get("xpcolor", None)
         self.is_boosting: bool = params.get("isboosting", False)
+        self.circle_avatar: bool = params.get("circleavatar", False)
 
     def __str__(self) -> str:
         return str(Image(self.url, self._response))
