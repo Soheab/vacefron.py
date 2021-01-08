@@ -3,27 +3,28 @@
 See here what changed or broke each version.
 
 ---
+
 ### v1.5.1 - January 8, 2020
 
 - Added support for `circle_avatar` in [.rank_card()](docs.md#rank-card). See more in the docs.
 - Added one alias: `rankcard()` -> [`.rank_card()`](docs.md#rank-card)
-  
+
 ### v1.5.0 - January 5, 2020
 
 - Added support for new endpoints:
   [.dock_of_shame()](docs.md#await-vac_apidock_of_shameuser) and
   [.woman_yelling_at_cat()](docs.md#await-vac_apiwoman_yelling_at_catwoman-cat) . See more in the docs.
 - Added some aliases:
-  - `womanyellingatcat()` -> [`.woman_yelling_at_cat()`](docs.md#await-vac_apiwoman_yelling_at_catwoman-cat)
-  - `icanmilkyou()` -> [`.i_can_milk_you()`](docs.md#await-vac_apii_can_milk_youuser-user2--none)
-  - `iamspeed()` -> [`.iam_speed()`](docs.md#await-vac_apiiam_speeduser)
-  - `emergencymeeting()` -> [`.emergency_meeting()`](docs.md#await-vac_apiemergency_meetingtext)
-  - `changemymind()` -> [`.change_my_mind()`](docs.md#await-vac_apichange_my_mindtext)
-  - `carreverse()` -> [`.car_reverse()`](docs.md#await-vac_apicar_reversetext)
-  - `dockofshame()` -> [`.dock_of_shame()`](docs.md#await-vac_apidock_of_shameuser)
-  - `distractedbf()` -> [`.distracted_bf()`](docs.md#await-vac_apidistracted_bfboyfriend-girlfriend-woman)
-  - `batmanslap()` -> [`.batman_slap()`](docs.md#await-vac_apibatman_slaptext-text2-batmannone-robinnone)
-  - `firsttime()` -> [`.first_time()`](docs.md#await-vac_apifirst_timeuser)
+    - `womanyellingatcat()` -> [`.woman_yelling_at_cat()`](docs.md#await-vac_apiwoman_yelling_at_catwoman-cat)
+    - `icanmilkyou()` -> [`.i_can_milk_you()`](docs.md#await-vac_apii_can_milk_youuser-user2--none)
+    - `iamspeed()` -> [`.iam_speed()`](docs.md#await-vac_apiiam_speeduser)
+    - `emergencymeeting()` -> [`.emergency_meeting()`](docs.md#await-vac_apiemergency_meetingtext)
+    - `changemymind()` -> [`.change_my_mind()`](docs.md#await-vac_apichange_my_mindtext)
+    - `carreverse()` -> [`.car_reverse()`](docs.md#await-vac_apicar_reversetext)
+    - `dockofshame()` -> [`.dock_of_shame()`](docs.md#await-vac_apidock_of_shameuser)
+    - `distractedbf()` -> [`.distracted_bf()`](docs.md#await-vac_apidistracted_bfboyfriend-girlfriend-woman)
+    - `batmanslap()` -> [`.batman_slap()`](docs.md#await-vac_apibatman_slaptext-text2-batmannone-robinnone)
+    - `firsttime()` -> [`.first_time()`](docs.md#await-vac_apifirst_timeuser)
 
 ### v1.4.0 - December 9, 2020
 

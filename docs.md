@@ -327,7 +327,7 @@ async def rank(ctx, member: discord.Member = None):
     with open('rank_stuff.json') as json_file:
         data = json.load(json_file)
 
-    user_rank = data[str(member.id)] # dict
+    user_rank = data[str(member.id)]  # dict
     gen_card = await vac_api.rank_card(
             username = str(member),  # wrapper will handle the #
             avatar = member.avatar_url_as(format = "png"),  # converting avatar to .png, including .gif
@@ -336,15 +336,15 @@ async def rank(ctx, member: discord.Member = None):
             current_xp = int(user_rank['current_xp']),
             next_level_xp = 500,  # you will need calculate this according the current_xp
             previous_level_xp = 50,  # you will need calculate this according the current_xp
-            custom_background = str(user_rank["background"]), # optional
-            xp_color = str(user_rank["bar_color"]), # optional
+            custom_background = str(user_rank["background"]),  # optional
+            xp_color = str(user_rank["bar_color"]),  # optional
             is_boosting = bool(member.premium_since),  # optional
             circle_avatar = True  # optional
             )
     rank_image = discord.File(fp = await gen_card.read(), filename = f"{member.name}_rank.png")
     await ctx.send(f"{member.name}'s rank in {ctx.guild.name}", file = rank_image)
 
-# custom_background, is_boosting, xp_color and circle_avatar are optional kwargs, see more in the docs.
+# custom_background, is_boosting, xp_color and circle_avatar are optional, see more in the docs.
 ```
 
 ##### [ejected](docs.md#await-vac_apiejectedname-crewmate--crewmatecolorsred-impostor--false) with [discord.py](https://github.com/Rapptz/discord.py):

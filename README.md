@@ -26,7 +26,8 @@ See the full and detailed [docs here](docs.md)
 
 ## Links
 
-[API](https://vacefron.nl/api/) | [Changelogs](https://github.com/Soheab/vacefron.py/blob/master/changelog.md) | [Examples](https://github.com/Soheab/vacefron.py/blob/master/docs.md#examples)
+[API](https://vacefron.nl/api/) | [Changelogs](https://github.com/Soheab/vacefron.py/blob/master/changelog.md)
+| [Examples](https://github.com/Soheab/vacefron.py/blob/master/docs.md#examples)
 
 ## Made by
 

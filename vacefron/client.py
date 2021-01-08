@@ -5,7 +5,6 @@ from re import search
 from typing import Tuple, Union
 from urllib.parse import quote, urlencode
 
-import discord
 from aiohttp import ClientSession
 
 from .classes import Image, RankCard, CrewMateColors
