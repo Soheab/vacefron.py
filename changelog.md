@@ -4,6 +4,11 @@ See here what changed or broke each version.
 
 ---
 
+### v1.6.0 - January 9, 2020
+
+- Added support for a new endpoint: [.drip()](docs.md#await-vac_apidock_of_shameuser). See more in the docs.
+- Fixed hyperlinks to docs and others for PyPi's description.
+
 ### v1.5.1 - January 8, 2020
 
 - Added support for `circle_avatar` arg in [.rank_card()](docs.md#rank-card). See more in the docs.

@@ -1,10 +1,12 @@
+[![Downloads Total](https://pepy.tech/badge/vacefron-py)](https://pepy.tech/project/vacefron-py)
+[![Downloads Month](https://pepy.tech/badge/vacefron-py/month)](https://pepy.tech/project/vacefron-py)
+[![Downloads Week](https://pepy.tech/badge/vacefron-py/week)](https://pepy.tech/project/vacefron-py)
 [![PyPi Version](https://img.shields.io/pypi/v/vacefron.py.svg)](https://pypi.python.org/pypi/vacefron.py/)
-[![Downloads](https://pepy.tech/badge/vacefron-py)](https://pepy.tech/project/vacefron-py)
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/Atomic-Design-UI/blob/master/LICENSE.md)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
 # VACEfron.py
 
-A Wrapper for [vacefron.nl/api](https://vacefron.nl/api/) written in Python.
+A Wrapper for [vacefron.nl/api][base_url] written in Python.
 
 ## Requirements
 
@@ -22,22 +24,36 @@ Install the package by doing one of the following commands:
 
 ## Documentation
 
-See the full and detailed [docs here](docs.md)
+See the full and detailed [docs here][docs]
 
 ## Links
 
-[API](https://vacefron.nl/api/) | [Changelogs](https://github.com/Soheab/vacefron.py/blob/master/changelog.md)
-| [Examples](https://github.com/Soheab/vacefron.py/blob/master/docs.md#examples)
+[API][base_url] | [Changelogs][changelog] | [Examples][examples] | [Github][github] | [PyPi][pypi]
 
 ## Made by
 
-This wrapper is made by **Soheab#6240**. DM me on Discord or join my server [here](https://discord.gg/yCzcfju) for
-anything related to this wrapper.
+This wrapper is made by **Soheab#6240**, DM me on Discord or join my server [here][discord_mine] for anything related to
+this wrapper.
 
-You can join VAC Efron's server [here](https://discord.gg/xJ2HRxZ) to suggest or report anything on the API.
+You can join VAC Efron's server [here][discord_vacefron] to suggest or report anything on the API.
 
 ## Other Wrappers
 
-- **Csharp:** [GitHub](https://github.com/VACEfron/VACEfron.NET) | [Nuget](https://www.nuget.org/packages/VACEfron.NET)
-- **Javascript:** [GitHub](https://github.com/Sidemen19/VACEfron.js) | [Npm](https://npmjs.com/package/vacefron)
-- **Java:** [GitHub](https://github.com/thunderstorm010/VACEfron4J)
+- **Csharp:** [GitHub][wrappers_csharp-github] | [Nuget][wrapper_csharp-nuget]
+- **Javascript:** [GitHub][wrappers_js-github] | [Npm][wrapper_js-npm]
+- **Java:** [GitHub][wrappers_java-github]
+
+
+[docs]: https://github.com/Soheab/vacefron.py/blob/master/docs.md
+[changelog]: https://github.com/Soheab/vacefron.py/blob/master/changelog.md
+[examples]: https://github.com/Soheab/vacefron.py/blob/master/docs.md#examples
+[base_url]: https://vacefron.nl/api/
+[github]: https://github.com/Soheab/vacefron.py
+[pypi]: https://pypi.org/project/vacefron.py/
+[discord_vacefron]: https://discord.gg/xJ2HRxZ
+[discord_mine]: https://discord.gg/yCzcfju
+[wrappers_csharp-github]: https://github.com/VACEfron/VACEfron.NET
+[wrapper_csharp-nuget]: https://www.nuget.org/packages/VACEfron.NET
+[wrappers_js-github]: https://github.com/Sidemen19/VACEfron.js
+[wrapper_js-npm]: https://npmjs.com/package/vacefron
+[wrappers_java-github]: https://github.com/thunderstorm010/VACEfron4J

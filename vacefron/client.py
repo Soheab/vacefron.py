@@ -75,13 +75,17 @@ class Client:
         return Image(str(response.url), response)
 
     async def distracted_bf(self, boyfriend: str, girlfriend: str, woman: str) -> Image:
-        response = await self._api_request(
-                "distractedbf", {"boyfriend": str(boyfriend), "girlfriend": str(girlfriend), "woman": str(woman)})
+        response = await self._api_request("distractedbf", {"boyfriend": str(boyfriend), "girlfriend": str(girlfriend),
+                                                            "woman": str(woman)})
         return Image(str(response.url), response)
 
     async def dock_of_shame(self, user: str) -> Image:
+        response = await self._api_request("dockofshame", {"user": str(user)})
+        return Image(str(response.url), response)
+
+    async def drip(self, user: str) -> Image:
         response = await self._api_request(
-                "dockofshame", {"user": str(user)})
+                "drip", {"user": str(user)})
         return Image(str(response.url), response)
 
     async def car_reverse(self, text: str) -> Image:

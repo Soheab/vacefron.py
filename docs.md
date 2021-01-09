@@ -91,6 +91,18 @@ Generate that "dock of shame" meme with your avatar.
 
 ---
 
+### await vac_api.drip(user)
+
+For your own Goku drip memes :)
+
+**Parameters**:
+
+- user `string` | Avatar of user.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
+
 ### await vac_api.car_reverse(text)
 
 Generate that "car reverse" meme with your own text.
@@ -336,10 +348,10 @@ async def rank(ctx, member: discord.Member = None):
             current_xp = int(user_rank['current_xp']),
             next_level_xp = 500,  # you will need calculate this according the current_xp
             previous_level_xp = 50,  # you will need calculate this according the current_xp
-            custom_background = str(user_rank["background"]),  # optional
-            xp_color = str(user_rank["bar_color"]),  # optional
-            is_boosting = bool(member.premium_since),  # optional
-            circle_avatar = True  # optional
+            custom_background = str(user_rank["background"]),  # optional custom background.
+            xp_color = str(user_rank["bar_color"]),  # optional progress bar color. Defaults to #fcba41. 
+            is_boosting = bool(member.premium_since),  # optional server boost icon next to username.
+            circle_avatar = True  # optional circle avatar instead of a square.
             )
     rank_image = discord.File(fp = await gen_card.read(), filename = f"{member.name}_rank.png")
     await ctx.send(f"{member.name}'s rank in {ctx.guild.name}", file = rank_image)
