@@ -314,13 +314,13 @@ Get an invitation to the VAC Efron's server (or and the creator of this wrapper.
 
 - creator `boolean` | To also get an invitation to the server of creator of this wrapper.
 
-**Return type**: string or tuple when `creator` is True
+**Return type**: [Union][[str], [tuple]]
 
 # Examples
 
 See here some examples
 
-##### Generate a [Rank card](docs.md#rank-card) with [discord.py](https://github.com/Rapptz/discord.py):
+##### Generate a [Rank card](docs.md#rank-card) with [discord.py]:
 
 ```python
 import vacefron
@@ -359,7 +359,7 @@ async def rank(ctx, member: discord.Member = None):
 # level, rank, custom_background, is_boosting, xp_color and circle_avatar are optional, see more in the docs.
 ```
 
-##### [ejected](docs.md#await-vac_apiejectedname-crewmate--crewmatecolorsred-impostor--false) with [discord.py](https://github.com/Rapptz/discord.py):
+##### [ejected](docs.md#await-vac_apiejectedname-crewmate--crewmatecolorsred-impostor--false) with [discord.py]:
 
 ```python
 import vacefron
@@ -387,12 +387,12 @@ This object gets returned from every endpoint.
 
 #### Image.url
 
-[str](https://docs.python.org/3/library/stdtypes.html#str ) - The url of the image
+[str]- The url of the image
 
 #### await Image.read()
 
-This will return a [io.BytesIO](https://docs.python.org/3/library/io.html#binary-i-o) object, which can be passed to
-discord.File() with a filename for [discord.py](https://github.com/Rapptz/discord.py):
+This will return a [io.BytesIO] object, which can be passed to
+discord.File() with a filename for [discord.py]:
 
 ```py
 npc_meme = await vac_api.npc("ah yes", "no u")
@@ -409,7 +409,7 @@ This object gets returned from `.rank_card()`
 
 #### RankCard.url
 
-[str](https://docs.python.org/3/library/stdtypes.html#str ) - The url of the card
+[str] - The url of the card
 
 #### await RankCard.read()
 
@@ -427,47 +427,47 @@ You can set `bytesio` to `False` if you want the bytes instead of an `io.BytesIO
 
 #### RankCard.username
 
-[str](https://docs.python.org/3/library/stdtypes.html#str ) - The user's username, you provided but `#` replaced with `%23`
+[str] - The user's username, you provided but `#` replaced with `%23`
 
 #### RankCard.avatar
 
-[str](https://docs.python.org/3/library/stdtypes.html#str ) - The user's avatar, you provided
+[str] - The user's avatar, you provided
 
 #### RankCard.current_xp
 
-[int](https://docs.python.org/3/library/functions.html#int ) - The user's XP amount, you provided
+[int] - The user's XP amount, you provided
 
 #### RankCard.next_level_xp
 
-[int](https://docs.python.org/3/library/functions.html#int ) - The user's next XP amount, you provided
+[int] - The user's next XP amount, you provided
 
 #### RankCard.previous_level_xp
 
-[int](https://docs.python.org/3/library/functions.html#int ) - The user's previous XP amount, you provided
+[int] - The user's previous XP amount, you provided
 
 #### RankCard.level
 
-Optional[[int](https://docs.python.org/3/library/functions.html#int )] - The user's level you provided
+Optional[[int]] - The user's level you provided
 
 #### RankCard.rank
 
-Optional[[int](https://docs.python.org/3/library/functions.html#int )] - The user's position, you provided
+Optional[[int]] - The user's position, you provided
 
 #### RankCard.custom_background
 
-Optional[[str](https://docs.python.org/3/library/stdtypes.html#str )] - An optional background for the rank card, you provided
+Optional[[str]] - An optional background for the rank card, you provided
 
 #### RankCard.xp_color
 
-Optional[[str](https://docs.python.org/3/library/stdtypes.html#str )] - The color for the XP bar, you provided
+Optional[[str]] - The color for the XP bar, you provided
 
 #### RankCard.is_boosting
 
-[bool](https://docs.python.org/3/library/functions.html#bool )
+[bool]
 
 #### RankCard.circle_avatar
 
-[bool](https://docs.python.org/3/library/functions.html#bool )
+[bool]
 
 ## CrewMateColors
 
@@ -524,3 +524,12 @@ Yellow color for the crewmate.
 #### 13 or random
 
 Random color from above for the crewmate.
+
+
+[str]: https://docs.python.org/3/library/stdtypes.html#str
+[int]: https://docs.python.org/3/library/functions.html#int
+[bool]: https://docs.python.org/3/library/functions.html#bool
+[discord.py]: https://github.com/Rapptz/discord.py
+[io.BytesIO]: https://docs.python.org/3/library/io.html#binary-i-o
+[Union]: https://docs.python.org/3/library/typing.html#typing.Union
+[tuple]: https://docs.python.org/3/library/stdtypes.html?highlight=tuple#tuple

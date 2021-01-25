@@ -2,7 +2,7 @@ from asyncio import AbstractEventLoop
 from asyncio import get_event_loop
 from random import choice as choose
 from re import search
-from typing import Tuple, Union
+from typing import Union
 from urllib.parse import quote, urlencode
 
 from aiohttp import ClientSession
@@ -54,7 +54,7 @@ class Client:
 
     # Json/URL
 
-    async def discord_server(self, creator: bool = False) -> Union[str, Tuple]:
+    async def discord_server(self, creator: bool = False) -> Union[str, tuple]:
         json_response = await self._api_request("")
         support_server = json_response.get("discord_server")
         if creator:
