@@ -1,6 +1,6 @@
 from enum import Enum
 from io import BytesIO
-from typing import Union
+from typing import Union, Optional
 
 from aiohttp import ClientResponse
 
@@ -22,8 +22,8 @@ class Image:
 
 
 class RankCard:
-    __slots__ = ("url", "_response", "_params", "username", "avatar", "level", "rank", "current_xp", "next_level_xp",
-                 "previous_level_xp", "custom_background", "xp_color", "is_boosting", "circle_avatar")
+    __slots__ = ("url", "_response", "_params", "username", "avatar", "current_xp", "next_level_xp", "previous_level_xp",
+                 "level", "rank", "custom_background", "xp_color", "is_boosting", "circle_avatar")
 
     def __init__(self, url, response, params) -> None:
         self.url = url
@@ -31,13 +31,13 @@ class RankCard:
         self._params: dict = params
         self.username: str = params.get("username")
         self.avatar: str = params.get("avatar")
-        self.level: int = params.get("level")
-        self.rank: int = params.get("rank")
         self.current_xp: int = params.get("currentxp")
         self.next_level_xp: int = params.get("nextlevelxp")
         self.previous_level_xp: int = params.get("previouslevelxp")
-        self.custom_background: str = params.get("custombg", None)
-        self.xp_color: str = params.get("xpcolor", None)
+        self.level: Optional[int] = params.get("level", None)
+        self.rank: Optional[int] = params.get("rank", None)
+        self.custom_background: Optional[str] = params.get("custombg", None)
+        self.xp_color: Optional[str] = params.get("xpcolor", None)
         self.is_boosting: bool = params.get("isboosting", False)
         self.circle_avatar: bool = params.get("circleavatar", False)
 

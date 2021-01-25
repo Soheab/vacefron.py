@@ -3,6 +3,10 @@
 See here what changed or broke each version.
 
 ---
+### v1.6.1 - January 25, 2020
+
+- Changes for [.rank_card()](docs.md#rank-card): rank and level are now optional and are now kwargs (KeyWordArguments), 
+  same for custom_background, xp_color, is_boosting and circle_avatar
 
 ### v1.6.0 - January 9, 2020
 

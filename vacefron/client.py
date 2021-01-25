@@ -169,15 +169,19 @@ class Client:
         response = await self._api_request("womanyellingatcat", {"woman": str(woman), "cat": str(cat)})
         return Image(str(response.url), response)
 
-    async def rank_card(self, username: str, avatar: str, level: int, rank: int, current_xp: int, next_level_xp: int,
-                        previous_level_xp: int, custom_background: str = None, xp_color: str = None,
+    async def rank_card(self, username: str, avatar: str, current_xp: int, next_level_xp: int, previous_level_xp: int,
+                        *, level: int = None, rank: int = None, custom_background: str = None, xp_color: str = None,
                         is_boosting: bool = False, circle_avatar: bool = False) -> RankCard:
 
         params = {
-            "username": str(username), "avatar": str(avatar), "level": int(level), "rank": int(rank),
-            "currentxp": int(current_xp), "nextlevelxp": int(next_level_xp), "previouslevelxp": int(previous_level_xp)
+            "username": str(username), "avatar": str(avatar), "currentxp": int(current_xp),
+            "nextlevelxp": int(next_level_xp), "previouslevelxp": int(previous_level_xp)
             }
 
+        if level:
+            params['level'] = int(level)
+        if rank:
+            params['rank'] = int(rank)
         if custom_background:
             params['custombg'] = str(custom_background).strip("#")
         if xp_color:

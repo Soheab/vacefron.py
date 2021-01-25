@@ -343,11 +343,11 @@ async def rank(ctx, member: discord.Member = None):
     gen_card = await vac_api.rank_card(
             username = str(member),  # wrapper will handle the #
             avatar = member.avatar_url_as(format = "png"),  # converting avatar to .png, including .gif
-            level = int(user_rank['level']),
-            rank = int(user_rank['rank']),
+            level = int(user_rank['level']), # optional level int on the xp bar.
+            rank = int(user_rank['rank']), # optional #int on the card.
             current_xp = int(user_rank['current_xp']),
-            next_level_xp = 500,  # you will need calculate this according the current_xp
-            previous_level_xp = 50,  # you will need calculate this according the current_xp
+            next_level_xp = 500,  # you will need calculate this according the current_xp.
+            previous_level_xp = 50,  # you will need calculate this according the current_xp.
             custom_background = str(user_rank["background"]),  # optional custom background.
             xp_color = str(user_rank["bar_color"]),  # optional progress bar color. Defaults to #fcba41. 
             is_boosting = bool(member.premium_since),  # optional server boost icon next to username.
@@ -356,7 +356,7 @@ async def rank(ctx, member: discord.Member = None):
     rank_image = discord.File(fp = await gen_card.read(), filename = f"{member.name}_rank.png")
     await ctx.send(f"{member.name}'s rank in {ctx.guild.name}", file = rank_image)
 
-# custom_background, is_boosting, xp_color and circle_avatar are optional, see more in the docs.
+# level, rank, custom_background, is_boosting, xp_color and circle_avatar are optional, see more in the docs.
 ```
 
 ##### [ejected](docs.md#await-vac_apiejectedname-crewmate--crewmatecolorsred-impostor--false) with [discord.py](https://github.com/Rapptz/discord.py):
@@ -387,7 +387,7 @@ This object gets returned from every endpoint.
 
 #### Image.url
 
-The url of the image
+[str](https://docs.python.org/3/library/stdtypes.html#str ) - The url of the image
 
 #### await Image.read()
 
@@ -409,7 +409,7 @@ This object gets returned from `.rank_card()`
 
 #### RankCard.url
 
-The url of the card
+[str](https://docs.python.org/3/library/stdtypes.html#str ) - The url of the card
 
 #### await RankCard.read()
 
@@ -419,7 +419,7 @@ discord.File() with a filename for [discord.py](https://github.com/Rapptz/discor
 ```py
 card = await vac_api.rank_card(....)
 card_bytes = await card.read()  # <_io.BytesIO object at 0x0438DFC8> - BytesIO object.
-await ctx.send(file = discord.File(card_bytes, filename = "rank_card.png"))
+await Messageable.send(file = discord.File(card_bytes, filename = "rank_card.png"))
 ```
 
 \
@@ -427,43 +427,47 @@ You can set `bytesio` to `False` if you want the bytes instead of an `io.BytesIO
 
 #### RankCard.username
 
-The user's username, you provided but `#` replaced with `%23`
+[str](https://docs.python.org/3/library/stdtypes.html#str ) - The user's username, you provided but `#` replaced with `%23`
 
 #### RankCard.avatar
 
-The user's avatar, you provided
-
-#### RankCard.level
-
-The user's current level you provided
-
-#### RankCard.rank
-
-The user's position, you provided
+[str](https://docs.python.org/3/library/stdtypes.html#str ) - The user's avatar, you provided
 
 #### RankCard.current_xp
 
-The user's current XP amount, you provided
+[int](https://docs.python.org/3/library/functions.html#int ) - The user's XP amount, you provided
 
 #### RankCard.next_level_xp
 
-The user's next XP amount, you provided
+[int](https://docs.python.org/3/library/functions.html#int ) - The user's next XP amount, you provided
 
 #### RankCard.previous_level_xp
 
-The user's previous XP amount, you provided
+[int](https://docs.python.org/3/library/functions.html#int ) - The user's previous XP amount, you provided
+
+#### RankCard.level
+
+Optional[[int](https://docs.python.org/3/library/functions.html#int )] - The user's level you provided
+
+#### RankCard.rank
+
+Optional[[int](https://docs.python.org/3/library/functions.html#int )] - The user's position, you provided
 
 #### RankCard.custom_background
 
-An optional background for the rank card, if you provided one else None
+Optional[[str](https://docs.python.org/3/library/stdtypes.html#str )] - An optional background for the rank card, you provided
 
 #### RankCard.xp_color
 
-The color for the XP bar but `#` replaced with `%23`, if you provided one else None
+Optional[[str](https://docs.python.org/3/library/stdtypes.html#str )] - The color for the XP bar, you provided
 
 #### RankCard.is_boosting
 
-Bool, True if you set it to True else False
+[bool](https://docs.python.org/3/library/functions.html#bool )
+
+#### RankCard.circle_avatar
+
+[bool](https://docs.python.org/3/library/functions.html#bool )
 
 ## CrewMateColors
 
