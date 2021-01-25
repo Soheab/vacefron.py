@@ -42,7 +42,7 @@ You can join VAC Efron's server [here][discord_vacefron] to suggest or report an
 - **Csharp:** [GitHub][wrappers_csharp-github] | [Nuget][wrapper_csharp-nuget]
 - **Javascript:** [GitHub][wrappers_js-github] | [Npm][wrapper_js-npm]
 - **Java:** [GitHub][wrappers_java-github]
-
+- **Go:** [GitHub][wrappers_go-github]
 
 [docs]: https://github.com/Soheab/vacefron.py/blob/master/docs.md
 [changelog]: https://github.com/Soheab/vacefron.py/blob/master/changelog.md
@@ -57,3 +57,5 @@ You can join VAC Efron's server [here][discord_vacefron] to suggest or report an
 [wrappers_js-github]: https://github.com/Sidemen19/VACEfron.js
 [wrapper_js-npm]: https://npmjs.com/package/vacefron
 [wrappers_java-github]: https://github.com/thunderstorm010/VACEfron4J
+[wrappers_go-github]: https://github.com/lavgup/vacefron.go
+
