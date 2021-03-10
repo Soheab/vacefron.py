@@ -27,9 +27,6 @@ All available endpoints you can use.
 ### Rank card
 
 ---
-    async def rank_card(self, username: str, avatar: str, current_xp: int, next_level_xp: int, previous_level_xp: int,
-                        *, level: int = None, rank: int = None, custom_background: str = None, xp_color: str = None,
-                        is_boosting: bool = False, circle_avatar: bool = False) -> RankCard:
 
 #### await vac_api.rank_card(username, avatar, current_xp, next_level_xp, previous_level_xp, *,
 level = None, rank = None, custom_background = None, xp_color = None, is_boosting = False, circle_avatar = False)
