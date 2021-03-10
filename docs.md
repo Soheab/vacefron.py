@@ -27,8 +27,12 @@ All available endpoints you can use.
 ### Rank card
 
 ---
+    async def rank_card(self, username: str, avatar: str, current_xp: int, next_level_xp: int, previous_level_xp: int,
+                        *, level: int = None, rank: int = None, custom_background: str = None, xp_color: str = None,
+                        is_boosting: bool = False, circle_avatar: bool = False) -> RankCard:
 
-#### await vac_api.rank_card(username, avatar, level, rank, current_xp, next_level_xp, previous_level_xp, custom_background = None, xp_color = None, is_boosting = False)
+#### await vac_api.rank_card(username, avatar, current_xp, next_level_xp, previous_level_xp, *,
+level = None, rank = None, custom_background = None, xp_color = None, is_boosting = False, circle_avatar = False)
 
 Generate a Rank card for Discord bots!
 
@@ -36,11 +40,11 @@ Generate a Rank card for Discord bots!
 
 - username `string` | The user's name.
 - avatar `string` | The user's avatar
-- level `int` | The user's current level.
-- rank `int` | The user's position on the board.
 - current_xp `int` | The user's current XP amount.
 - next_level_xp `int` | The user's next XP amount.
 - previous_level_xp `int` | The user's previous XP amount.
+- level `int` | The user's current level. Optional.
+- rank `int` | The user's position on the board. Optional.
 - custom_background `string` | An optional image url or hex color for the background.
 - xp_color `string` | The hex color for the XP bar. Defaults to #FCBA41.
 - is_boosting `bool` | If True, a boost badge will be displayed next to user's name. Defaults to False.

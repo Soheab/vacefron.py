@@ -173,6 +173,10 @@ class Client:
                         *, level: int = None, rank: int = None, custom_background: str = None, xp_color: str = None,
                         is_boosting: bool = False, circle_avatar: bool = False) -> RankCard:
 
+        # removing ?size=.... for a more reliable result.
+        avatar_size_regex = search("\?size=[0-9]{3,4}$", str(avatar))
+        avatar = str(avatar).strip(str(avatar_size_regex.group(0))) if avatar_size_regex else str(avatar)
+
         params = {
             "username": str(username), "avatar": str(avatar), "currentxp": int(current_xp),
             "nextlevelxp": int(next_level_xp), "previouslevelxp": int(previous_level_xp)

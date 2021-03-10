@@ -3,22 +3,26 @@
 See here what changed or broke each version.
 
 ---
-### v1.6.1 - January 25, 2020
+### v1.6.2 - March 10, 2021
+
+- Little fix for `.rank_card()` returned a BadRequest in some cases when avatar had a specific size.
+  
+### v1.6.1 - January 25, 2021
 
 - Changes for [.rank_card()](docs.md#rank-card): rank and level are now optional and are now kwargs (KeyWordArguments), 
   same for custom_background, xp_color, is_boosting and circle_avatar
 
-### v1.6.0 - January 9, 2020
+### v1.6.0 - January 9, 2021
 
 - Added support for a new endpoint: [.drip()](docs.md#await-vac_apidripuser). See more in the docs.
 - Fixed hyperlinks to docs and others for PyPi's description.
 
-### v1.5.1 - January 8, 2020
+### v1.5.1 - January 8, 2021
 
 - Added support for `circle_avatar` arg in [.rank_card()](docs.md#rank-card). See more in the docs.
 - Added one alias: `rankcard()` -> [`.rank_card()`](docs.md#rank-card)
 
-### v1.5.0 - January 5, 2020
+### v1.5.0 - January 5, 2021
 
 - Added support for new endpoints:
   [.dock_of_shame()](docs.md#await-vac_apidock_of_shameuser) and
