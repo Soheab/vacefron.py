@@ -28,8 +28,7 @@ All available endpoints you can use.
 
 ---
 
-#### await vac_api.rank_card(username, avatar, current_xp, next_level_xp, previous_level_xp, *,
-level = None, rank = None, custom_background = None, xp_color = None, is_boosting = False, circle_avatar = False)
+#### await vac_api.rank_card(username, avatar, current_xp, next_level_xp, previous_level_xp, *, level = None, rank = None, custom_background = None, xp_color = None, is_boosting = False, circle_avatar = False)
 
 Generate a Rank card for Discord bots!
 
