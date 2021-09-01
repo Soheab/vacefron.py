@@ -257,7 +257,7 @@ Generate that "Table flip" meme with someone's avatar.
 
 ---
 
-### await vac_api.water(user)
+### await vac_api.water(text)
 
 Generate that "water" meme with your own text.
 
@@ -269,7 +269,7 @@ Generate that "water" meme with your own text.
 
 ---
 
-### await vac_api.wide(text)
+### await vac_api.wide(user)
 
 Make someone's avatar a *little* bit wider.
 
