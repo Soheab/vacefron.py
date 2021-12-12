@@ -29,12 +29,12 @@ class Client:
     __slots__ = ("session", "loop")
 
     def __init__(self, *, session: ClientSession = None, loop: AbstractEventLoop = None) -> None:
-        self.session = ClientSession(loop = get_event_loop() or loop) or session
+        self.session = ClientSession(loop=get_event_loop() or loop) or session
 
     async def _api_request(self, endpoint: str, params: dict = None):
         url = f"https://vacefron.nl/api/{endpoint}"
         if params:
-            encoded_param = urlencode(params, quote_via = quote)
+            encoded_param = urlencode(params, quote_via=quote)
             url += f"?{encoded_param}"
         response = await self.session.get(str(url))
 
@@ -64,6 +64,10 @@ class Client:
 
     # Image
 
+    async def adios(self, user: str) -> Image:
+        response = await self._api_request("adios", {"user": str(user)})
+        return Image(str(response.url), response)
+
     async def batman_slap(self, text: str, text2: str, batman: str = None, robin: str = None) -> Image:
         params = {"text1": str(text), "text2": str(text2)}
         if batman:
@@ -75,8 +79,9 @@ class Client:
         return Image(str(response.url), response)
 
     async def distracted_bf(self, boyfriend: str, girlfriend: str, woman: str) -> Image:
-        response = await self._api_request("distractedbf", {"boyfriend": str(boyfriend), "girlfriend": str(girlfriend),
-                                                            "woman": str(woman)})
+        response = await self._api_request(
+            "distractedbf", {"boyfriend": str(boyfriend), "girlfriend": str(girlfriend), "woman": str(woman)}
+        )
         return Image(str(response.url), response)
 
     async def dock_of_shame(self, user: str) -> Image:
@@ -84,8 +89,7 @@ class Client:
         return Image(str(response.url), response)
 
     async def drip(self, user: str) -> Image:
-        response = await self._api_request(
-                "drip", {"user": str(user)})
+        response = await self._api_request("drip", {"user": str(user)})
         return Image(str(response.url), response)
 
     async def car_reverse(self, text: str) -> Image:
@@ -100,8 +104,13 @@ class Client:
         response = await self._api_request("emergencymeeting", {"text": str(text)})
         return Image(str(response.url), response)
 
-    async def ejected(self, name: str, crewmate: Union[str, int, CrewMateColors] = CrewMateColors.RED,
-                      impostor: bool = False, imposter: bool = False) -> Image:
+    async def ejected(
+        self,
+        name: str,
+        crewmate: Union[str, int, CrewMateColors] = CrewMateColors.RED,
+        impostor: bool = False,
+        imposter: bool = False,
+    ) -> Image:
         impostor = impostor or imposter
         get_color = await _get_from_enum(CrewMateColors, crewmate)
         if get_color is CrewMateColors.RANDOM or not get_color:
@@ -110,7 +119,8 @@ class Client:
             crewmate = get_color.name
 
         response = await self._api_request(
-                "ejected", {"name": str(name), "crewmate": str(crewmate.lower()), "impostor": bool(impostor)})
+            "ejected", {"name": str(name), "crewmate": str(crewmate.lower()), "impostor": bool(impostor)}
+        )
         return Image(str(response.url), response)
 
     async def first_time(self, user: str) -> Image:
@@ -141,7 +151,7 @@ class Client:
         response = await self._api_request("npc", {"text1": str(text), "text2": str(text2)})
         return Image(str(response.url), response)
 
-    async def stonks(self, user: str, not_stonks = False) -> Image:
+    async def stonks(self, user: str, not_stonks=False) -> Image:
         params = {"user": str(user)}
         if not_stonks:
             params["notstonks"] = True
@@ -169,35 +179,48 @@ class Client:
         response = await self._api_request("womanyellingatcat", {"woman": str(woman), "cat": str(cat)})
         return Image(str(response.url), response)
 
-    async def rank_card(self, username: str, avatar: str, current_xp: int, next_level_xp: int, previous_level_xp: int,
-                        *, level: int = None, rank: int = None, custom_background: str = None, xp_color: str = None,
-                        is_boosting: bool = False, circle_avatar: bool = False) -> RankCard:
+    async def rank_card(
+        self,
+        username: str,
+        avatar: str,
+        current_xp: int,
+        next_level_xp: int,
+        previous_level_xp: int,
+        *,
+        level: int = None,
+        rank: int = None,
+        custom_background: str = None,
+        xp_color: str = None,
+        is_boosting: bool = False,
+        circle_avatar: bool = False,
+    ) -> RankCard:
 
         # removing ?size=.... for a more reliable result.
         avatar_size_regex = search("\?size=[0-9]{3,4}$", str(avatar))
         avatar = str(avatar).strip(str(avatar_size_regex.group(0))) if avatar_size_regex else str(avatar)
 
         params = {
-            "username": str(username), "avatar": str(avatar), "currentxp": int(current_xp),
-            "nextlevelxp": int(next_level_xp), "previouslevelxp": int(previous_level_xp)
-            }
+            "username": str(username),
+            "avatar": str(avatar),
+            "currentxp": int(current_xp),
+            "nextlevelxp": int(next_level_xp),
+            "previouslevelxp": int(previous_level_xp),
+        }
 
         if level:
-            params['level'] = int(level)
+            params["level"] = int(level)
         if rank:
-            params['rank'] = int(rank)
+            params["rank"] = int(rank)
         if custom_background:
-            params['custombg'] = str(custom_background).strip("#")
+            params["custombg"] = str(custom_background).strip("#")
         if xp_color:
             if not search(r"^(?:[0-9a-fA-F]{3}){1,2}$", str(xp_color).strip("#")):
-                raise BadRequest(
-                        "Invalid HEX value. You're only allowed to enter HEX (0-9 & A-F)"
-                        )
-            params['xpcolor'] = str(xp_color).replace("#", "")
+                raise BadRequest("Invalid HEX value. You're only allowed to enter HEX (0-9 & A-F)")
+            params["xpcolor"] = str(xp_color).replace("#", "")
         if is_boosting:
-            params['isboosting'] = bool(is_boosting)
+            params["isboosting"] = bool(is_boosting)
         if circle_avatar:
-            params['circleavatar'] = bool(circle_avatar)
+            params["circleavatar"] = bool(circle_avatar)
 
         response = await self._api_request("rankcard", params)
         return RankCard(str(response.url), response, params)

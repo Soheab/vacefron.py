@@ -50,6 +50,18 @@ Generate a Rank card for Discord bots!
 
 ---
 
+### await vac_api.adios(user)
+
+Generate that "adios" meme with a avatar.
+
+**Parameters**:
+
+- user `string` | Avatar of user.
+
+**Return type:** [Image](docs.md#image "Image object attributes")
+
+---
+
 ### await vac_api.batman_slap(text, text2, batman=None, robin=None)
 
 Generate that batman slapping meme with custom texts and images.

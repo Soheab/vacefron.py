@@ -3,6 +3,11 @@
 See here what changed or broke each version.
 
 ---
+
+### v1.6.3 - December 12, 2021
+
+- Added support for a new endpoint: [.asiod()](docs.md#await-vac_apiadiosuser). See more in the docs.
+
 ### v1.6.2 - March 10, 2021
 
 - Little fix for `.rank_card()` returned a BadRequest in some cases when avatar had a specific size.
