@@ -6,7 +6,7 @@ See here what changed or broke each version.
 
 ### v1.6.3 - December 12, 2021
 
-- Added support for a new endpoint: [.asiod()](docs.md#await-vac_apiadiosuser). See more in the docs.
+- Added support for a new endpoint: [.adios()](docs.md#await-vac_apiadiosuser). See more in the docs.
 
 ### v1.6.2 - March 10, 2021
 
