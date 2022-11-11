@@ -28,11 +28,11 @@ class Rankcard:
     avatar_url: :class:`str`
         The avatar url of the user.
     current_xp: :class:`int`
-        The current xp of the user.
+        The current XP of the user.
     next_level_xp: :class:`int`
-        The xp required to level up.
+        The XP required to level up.
     previous_level_xp: :class:`int`
-        The xp required to level down.
+        The XP required to level down.
     level: Optional[:class:`int`]
         The level of the user. Defaults to ``None``.
     rank: Optional[:class:`int`]
@@ -44,7 +44,7 @@ class Rankcard:
     text_shadow_color: Optional[:class:`str`]
         The shadow color of the username as hex value. Defaults to ``None``.
     xp_colour: Optional[:class:`str`]
-        The colour of the xp bar as hex value. Defaults to ``None``.
+        The colour of the XP bar as hex value. Defaults to ``None``.
     circle_avatar: :class:`bool`
         Whether the avatar should be a circle or not. Defaults to ``False``.
     badges: List[:class:`Badges`]
@@ -191,13 +191,13 @@ class Rankcard:
         async def read(self, bytesio: bool = False):
             if not self._image:
                 raise RuntimeError(
-                    ("No session was set. Did you conscruct this object yourself and not pass it to Client.rankcard? ")
+                    ("No session was set. Did you construct this object yourself and not pass it to Client.rankcard? ")
                 )
             return await self._image.read(bytesio=bytesio)
 
         async def file(self, cls, filename: str = "image.png"):
             if not self._image:
                 raise RuntimeError(
-                    ("No session was set. Did you conscruct this object yourself and not pass it to Client.rankcard? ")
+                    ("No session was set. Did you construct this object yourself and not pass it to Client.rankcard? ")
                 )
             return await self._image.file(cls, filename=filename)

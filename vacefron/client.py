@@ -19,7 +19,7 @@ __all__: Tuple[str, ...] = ("Client",)
 
 
 class Client:
-    """Represents a Client for the alexflipnote API.
+    """Represents a Client for the Vacefron API.
 
     Parameters
     ----------
@@ -43,19 +43,17 @@ class Client:
         ...
 
     async def discord_server(self, *, creator: bool = False) -> Union[str, Tuple[str, str]]:
-        """Returns an invite to VacEfron's discord server.
+        """Returns an invite to the API's support server.
 
         Parameters
         ----------
         creator: Optional[:class:`bool`]
-            Whether to return the invite to the creator of the bot.
+            Whether to also return the wrapper creator's support server invite.
 
         Returns
         -------
         Union[:class:`str`, :class:`Tuple[:class:`str`, :class:`str`]`]
-            The invite to the VacEfron's server
-                if creator is False, otherwise a tuple with an invite to the
-                    alexflipnote server and the creator of this wrapper.
+            The invites.
         """
         data = await self.__http.base_page()
         support_server = data["discord_server"]
@@ -65,13 +63,7 @@ class Client:
         return support_server
 
     async def readme(self) -> str:
-        """Returns the readme of the API.
-
-        Returns
-        -------
-        :class:`str`
-            The readme of the API.
-        """
+        """:class:`str`: Returns the readme of the API."""
         data = await self.__http.base_page()
         return data["readme"]
 
@@ -351,7 +343,7 @@ class Client:
 
         Returns
         -------
-        :class: `Image`
+        :class:`Image`
             An Image object representing the generated image.
         """
         response = await self.__http.with_image(ImageEndpoints.WIDE, image)
@@ -411,7 +403,7 @@ class Client:
         user: :class:`str`
             The user avatar to use in the image.
         stonks: :class:`bool`
-            Whether it's stonks or not stonks. Defaults to True.
+            Whether it's stonks or not. Defaults to True.
         """
         response = await self.__http.stonks(user=user, notStonks=not stonks)
         return self.__http._handle_image(response)
@@ -500,7 +492,7 @@ class Client:
 
                 support_server = await self.discord_server(creator=True)
                 base += "\nIf you are still having issues, please join the {support_server} and ask for help there."
-                base += "\n\n!!! This detailed error will be removed in the next version !!! please update your code."
+                base += "\n\n!!! This detailed error will be removed in the future !!! please update your code."
 
             raise TypeError(base)
 
