@@ -47,13 +47,11 @@ _KEYWORDS = [
     "aiohttp",
     "leveling",
 ]
-_URLS = (
-    {
+_URLS = {
         "Discord": "https://discord.gg/xJ2HRxZ",
         "Documentation": f"{_GITHUB_URL}/blob/master/docs.md",
         "Issue tracker": f"{_GITHUB_URL}/issues",
-    },
-)
+    }
 setup(
     author="Soheab",
     name="vacefron.py",
