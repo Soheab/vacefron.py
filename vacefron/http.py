@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Coroutine, List, Optional, Tuple, ClassVar, Union, Any, TYPE_CHECKING, NamedTuple
+from typing import Coroutine, Optional, Tuple, ClassVar, Union, Any, TYPE_CHECKING
 
 import aiohttp
 import urllib.parse
@@ -136,54 +136,6 @@ class HTTPClient:
 
     def base_page(self) -> Coroutine[Any, Any, Raw]:
         return self.request()  # type: ignore
-
-    async def __get_all_endpoints(self) -> List:
-        data = await self.base_page()
-        endpoints = data["endpoints"]
-
-        class Arg(NamedTuple):
-            name: str
-            type: str
-            multiple_types: bool
-
-        class Endpoint(NamedTuple):
-            endpoint: str
-            args: List[Arg]
-
-        urls: List[str] = []
-
-        for endpoint in endpoints:
-            no_prefix = endpoint.removeprefix("GET ")
-            url = f"https://vacefron.nl/{no_prefix}"
-            urls.append(url)
-
-        def parse_args(args):
-            res: List[Arg] = []
-            parsed_args = args.replace("[", "").replace("]", "").split("&")
-            for arg in parsed_args:
-                name, value = arg.split("=")
-                values = value.split("|")
-                multiple = len(values) > 1
-
-                comp = Arg(
-                    name=name,
-                    type=value,
-                    multiple_types=multiple,
-                )
-                res.append(comp)
-
-            return res
-
-        def get_base_and_args(url: str):
-            removed_url = url.removeprefix(self.BASE_URL)
-            parsed_url = removed_url.split("?")
-            endpoint = parsed_url[0]
-            args = parsed_url[1:][0]
-            parsed_args = parse_args(args)
-            return Endpoint(endpoint=endpoint, args=parsed_args)
-
-        all_endpoints = [get_base_and_args(url) for url in urls]
-        return all_endpoints  # type: ignore
 
     async def close(self) -> None:
 

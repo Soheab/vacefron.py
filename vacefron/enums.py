@@ -19,10 +19,6 @@ class CrewmateColour(Enum):
 
 
 class _BaseEnum(Enum):
-    @property
-    def BASE_URL(self) -> str:
-        return "https://vacefron.nl/api"
-
     def __str__(self) -> str:
         return self.value
 
