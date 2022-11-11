@@ -2,9 +2,6 @@ from re import MULTILINE as re_MULTILINE, search as re_search
 
 from setuptools import setup  # type: ignore
 
-requirements = []
-with open("requirements.txt") as f:
-    requirements = f.read().splitlines()
 
 readme = ""
 with open("README.md") as f:
@@ -17,6 +14,7 @@ with open("vacefron/__init__.py") as f:
 if not version:
     raise RuntimeError("version is not set")
 
+requirements = ["aiohttp"]
 _GITHUB_URL: str = "https://github.com/Soheab/vacefron.py"
 _CLASSIFIERS = [
     "Development Status :: 5 - Production/Stable",
