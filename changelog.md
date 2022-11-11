@@ -8,6 +8,9 @@ See here what changed or broke each version.
 Big rewrite with lots of changes. See the commit on GitHub for more details: https://github.com/Soheab/vacefron.py
 Might write logs later idk.
 
+- Add support for new endpoint: `/peeposign`
+- Add fixes for `/rankcard` with badges and more.
+
 ### v1.6.3 - December 12, 2021
 
 - Added support for a new endpoint: [.adios()](docs.md#await-vac_apiadiosuser). See more in the docs.
