@@ -104,7 +104,6 @@ class Rankcard:
         self.text_shadow_colour: Optional[str] = (
             text_shadow_colour if text_shadow_colour is not None else text_shadow_color
         )
-        print("aaa", self.text_shadow_colour)
         self.xp_colour: Optional[str] = xp_colour if xp_colour is not None else xp_color
 
         self.username: str = username
