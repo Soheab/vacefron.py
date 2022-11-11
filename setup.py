@@ -50,6 +50,11 @@ _URLS = {
         "Documentation": f"{_GITHUB_URL}/blob/master/docs.md",
         "Issue tracker": f"{_GITHUB_URL}/issues",
     }
+_PACKAGES = [
+    "vacefron",
+    "vacefron.types",
+    "vacefron.models",
+]
 setup(
     author="Soheab",
     name="vacefron.py",
@@ -59,7 +64,7 @@ setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     version=version,
-    packages=["vacefron"],
+    packages=_PACKAGES,
     download_url=f"{_GITHUB_URL}/archive/refs/tags/v{version}.tar.gz",
     install_requires=requirements,
     keywords=_KEYWORDS,
