@@ -50,7 +50,7 @@ _KEYWORDS = [
 _URLS = (
     {
         "Discord": "https://discord.gg/xJ2HRxZ",
-        "Documentation": f"{_GITHUB_URL}/blob/v{version}/docs.md",
+        "Documentation": f"{_GITHUB_URL}/blob/master/docs.md",
         "Issue tracker": f"{_GITHUB_URL}/issues",
     },
 )
