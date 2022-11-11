@@ -31,7 +31,7 @@ See the full and detailed [docs here][docs]
 
 ## Made by
 
-This wrapper is made by **Soheab#6240**, DM me on Discord or join my server [here][discord_mine] for anything related to
+This wrapper is made by **Soheab_#6240**, DM me on Discord or join my server [here][discord_mine] for anything related to
 this wrapper.
 
 You can join VAC Efron's server [here][discord_vacefron] to suggest or report anything on the API.
