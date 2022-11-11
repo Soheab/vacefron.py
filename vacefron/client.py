@@ -30,7 +30,7 @@ class Client:
     __slots__: Tuple[str, ...] = ("__http",)
 
     def __init__(self, *, session: Optional[ClientSession] = None) -> None:
-        self.__http = _HTTPClient(self, session=session)
+        self.__http: _HTTPClient = _HTTPClient(self, session=session)
 
     # Json/URL
 

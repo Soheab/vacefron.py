@@ -1,6 +1,12 @@
+from typing import Tuple
 from enum import Enum
 
-
+class _BaseEnum(Enum):
+    def __str__(self) -> str:
+        return self.value if isinstance(self.value, str) else ''
+    
+    def __int__(self) -> int:
+        return self.value if isinstance(self.value, int) else 0
 class CrewmateColour(Enum):
     BLACK = 1
     BLUE = 2
@@ -17,11 +23,23 @@ class CrewmateColour(Enum):
     YELLOW = 12
     RANDOM = 13
 
+class Badges(_BaseEnum):
+    BOOST = "boost"
+    BRAVERY = "bravery"
+    BRILLIANCE = "brilliance"
+    BUG_HUNTER = "bughunter"
+    DEVELOPER = "developer"
+    EARLY_SUPPORTER = "earlysupporter"
+    EVENTS = "events"
+    NITRO = "nitro"
+    PARTNER = "partner"
+    STAFF = "staff"
 
-class _BaseEnum(Enum):
-    def __str__(self) -> str:
-        return self.value
 
+__all__: Tuple[str, ...] = (
+    "CrewmateColour",
+    "Badges",
+)
 
 class AllEndpoints(_BaseEnum):
     ADIOS = "/adios"
@@ -70,6 +88,9 @@ class UserEndpoints(_BaseEnum):
     TABLEFLIP = "/tableflip"
     WOLVERINE = "/wolverine"
 
+class ImageEndpoints(_BaseEnum):
+    WIDE = "/wide"
+
 
 class OtherEndpoints(_BaseEnum):
     BATMANSLAP = "/batmanslap"
@@ -79,20 +100,3 @@ class OtherEndpoints(_BaseEnum):
     STONKS = "/stonks"
     WIDE = "/wide"
     WOMANYELLINGATCAT = "/womanyellingatcat"
-
-
-class ImageEndpoints(_BaseEnum):
-    WIDE = "/wide"
-
-
-class Badges(_BaseEnum):
-    BOOST = "boost"
-    BRAVERY = "bravery"
-    BRILLIANCE = "brilliance"
-    BUG_HUNTER = "bughunter"
-    DEVELOPER = "developer"
-    EARLY_SUPPORTER = "earlysupporter"
-    EVENTS = "events"
-    NITRO = "nitro"
-    PARTNER = "partner"
-    STAFF = "staff"
