@@ -1,4 +1,18 @@
-# source: https://github.com/BlistBotList/blist-wrapper/blob/bc0c0fe9afbea39993ccfa8b6d633c2b5be634c8/blist/errors.py
+from __future__ import annotations
+from typing import TYPE_CHECKING, Any, Tuple
+
+if TYPE_CHECKING:
+    from aiohttp import ClientResponse
+
+
+__all__: Tuple[str, ...] = (
+    "VacEfronException",
+    "BadRequest",
+    "NotFound",
+    "InternalServerError",
+    "Forbidden",
+    "HTTPException",
+)
 
 
 class VacEfronException(Exception):
@@ -13,12 +27,16 @@ class NotFound(VacEfronException):
     pass
 
 
+class Forbidden(VacEfronException):
+    pass
+
+
 class InternalServerError(VacEfronException):
     pass
 
 
 class HTTPException(VacEfronException):
-    def __init__(self, response, message):
+    def __init__(self, response: ClientResponse, message: Any):
         self.response = response
         self.status = response.status
         self.message = message

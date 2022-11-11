@@ -1,41 +1,73 @@
-from re import search, MULTILINE
+from re import MULTILINE as re_MULTILINE, search as re_search
 
 from setuptools import setup  # type: ignore
 
+requirements = []
+with open("requirements.txt") as f:
+    requirements = f.read().splitlines()
+
+readme = ""
 with open("README.md") as f:
     readme = f.read()
 
-# source: https://github.com/Rapptz/discord.py/blob/master/setup.py#L9-L10
+version = ""
 with open("vacefron/__init__.py") as f:
-    content = f.read()
-    version = search(
-            r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', content, MULTILINE
-            ).group(1)
-    author = search(r'^__author__\s*=\s*[\'"]([^\'"]*)[\'"]', content, MULTILINE).group(
-            1
-            )
-    _license = search(
-            r'^__license__\s*=\s*[\'"]([^\'"]*)[\'"]', content, MULTILINE
-            ).group(1)
+    version: str = re_search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re_MULTILINE).group(1)  # type: ignore
 
+if not version:
+    raise RuntimeError("version is not set")
+
+_GITHUB_URL: str = "https://github.com/Soheab/vacefron.py"
+_CLASSIFIERS = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: aiohttp",
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Internet",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+_KEYWORDS = [
+    "vacefron",
+    "discord",
+    "api",
+    "wrapper",
+    "memes",
+    "image",
+    "discord.py",
+    "rankcard",
+    "rank",
+    "card",
+    "aiohttp",
+    "leveling",
+]
+_URLS = (
+    {
+        "Discord": "https://discord.gg/xJ2HRxZ",
+        "Documentation": f"{_GITHUB_URL}/blob/master/docs.md",
+        "Issue tracker": f"{_GITHUB_URL}/issues",
+    },
+)
 setup(
-        name = "vacefron.py",
-        description = "A Wrapper for vacefron.nl/api written in Python.",
-        long_description = readme,
-        long_description_content_type = "text/markdown",
-        version = version,
-        packages = ["vacefron"],
-        url = "https://github.com/Soheab/vacefron.py",
-        download_url = f"https://github.com/Soheab/vacefron.py/archive/v{version}.tar.gz",
-        license = _license,
-        author = author,
-        install_requires = ["aiohttp"],
-        keywords = ["vacefron", "discord", "api", "wrapper", "memes", "image", "discord.py"],
-        project_urls = {
-            "Discord": "https://discord.gg/xJ2HRxZ",
-            "Source": "https://github.com/Soheab/vacefron.py",
-            "Documentation": "https://github.com/Soheab/vacefron.py/blob/master/docs.md",
-            "Issue tracker": "https://github.com/Soheab/vacefron.py/issues",
-            },
-        python_requires = ">=3.6",
-        )
+    author="Soheab",
+    name="vacefron.py",
+    url=_GITHUB_URL,
+    description="A Wrapper for vacefron.nl/api written in Python.",
+    license="MPL-2.0",
+    long_description=readme,
+    long_description_content_type="text/markdown",
+    version=version,
+    packages=["vacefron"],
+    download_url=f"{_GITHUB_URL}/archive/refs/tags/v{version}.tar.gz",
+    install_requires=requirements,
+    keywords=_KEYWORDS,
+    project_urls=_URLS,
+    python_requires=">=3.8",
+    classifiers=_CLASSIFIERS,
+)
