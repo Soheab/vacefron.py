@@ -6,11 +6,11 @@ See here what changed or broke each version.
 
 ## v2.0.1 - November 12, 2022
 
-- Fix a couple of bugs
-- Remove some useless code
-- Clean up the code
+- Fix a bug where /models and /types weren't in the package
+- Remove some not used code
+- Cleaned up the code
 - Remove leftover debug code
-- Corrected `__license__` to MLP-2.0 and `__author__` to Soheab.
+- Corrected `__license__` to MLP-2.0 and `__author__` to Soheab
 
 ## v2.0.0 - November 11, 2022
 Big rewrite with lots of changes. See the commit on GitHub for more details: https://github.com/Soheab/vacefron.py
