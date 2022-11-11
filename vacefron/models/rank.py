@@ -148,8 +148,6 @@ class Rankcard:
             if value is not None:
                 base[key] = value
 
-        # print(base)
-
         return base  # type: ignore
 
     @classmethod

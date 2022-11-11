@@ -58,7 +58,3 @@ class Image:
             The filename to uswe.
         """
         return cls(await self.read(bytesio=False), filename=filename, **kwargs)
-
-    @classmethod
-    def from_url(cls, url: str, session: ClientSession) -> Image:
-        return cls(url, session)

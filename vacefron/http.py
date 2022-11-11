@@ -52,14 +52,15 @@ class HTTPClient:
         else:
             return_json = True
         if params:
-            encoded_param = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)  # type: ignore
+            encoded_param = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)
             url += f"?{str(encoded_param)}"
 
         await self.initiate_session()
+        # Gets rid of the linter warning.
         if not self.__session:
             raise RuntimeError(
                 "Session is not initialized. This should never happen."
-            )  # just to get rid of the linter warning.
+            )
 
         async with self.__session.get(url) as response:
             if response.status == 200:
@@ -79,7 +80,13 @@ class HTTPClient:
                 raise HTTPException(response, await response.text())
 
     def _handle_image(self, response: ClientResponse) -> Image:
-        return Image.from_url(str(response.url), self.__session)  # type: ignore
+        # Gets rid of the linter warning.
+        if not self.__session:
+            raise RuntimeError(
+                "Session is not initialized. This should never happen."
+            )
+
+        return Image(str(response.url), self.__session)
 
     def with_users(self, endpoint: UserEndpoints, *users: Union[str, None]) -> Response:
         data = {}
