@@ -32,7 +32,7 @@ Validates and returns the Rankcard object with state.
 ### Parameters
 - rankcard: [Rankcard] - The Rankcard object to validate.
 ### Example
-See [here](#rankcard)
+See [here](#example-1)
 ## User
 ---
 ## await vac_api.adios(user: str) -> [Image]:
@@ -156,7 +156,7 @@ Returns an image of meme: "Stonks".
 Returns an image of amogus meme: "Ejected".
 #### Parameters:
 - name ([str]) - The name of the user to use.
-- crewmate (Union[str], [int], [CrewmateColour]) - \
+- crewmate ([Union]\[[str], [int], [CrewmateColour]]) - \
 The crewmate colour to use. This can be a string (same as [CrewmateColour] attributes), int (1 to 13) or CrewmateColour enum. 
 Defaults to [CrewmateColour].RED.
 
@@ -268,8 +268,8 @@ print(card.name, card.url)
 [io.BytesIO]: https://docs.python.org/3/library/io.html#binary-i-o
 [Union]: https://docs.python.org/3/library/typing.html#typing.Union
 [tuple]: https://docs.python.org/3/library/stdtypes.html?highlight=tuple#tuple
-[Image]: #Image
-[Badges]: #Badges
-[Rankcard]: #Rankcard
-[CrewmateColour]: #CrewmateColour
-[ejected]: #await-vac_apiejectedname-str-crewmate-unionstr-int-crewmatecolour-impostor-bool-false--image
+[Image]: #image-1
+[Badges]: #badges
+[Rankcard]: #rankcard-1
+[CrewmateColour]: #crewmatecolour
+[ejected]: #await-vac_apiejectedname-str-crewmate-unionstr-int-crewmatecolour-impostor-bool--false---image
