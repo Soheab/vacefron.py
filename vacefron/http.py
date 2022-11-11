@@ -1,0 +1,193 @@
+from __future__ import annotations
+from typing import Coroutine, List, Optional, Tuple, ClassVar, Union, Any, TYPE_CHECKING, NamedTuple
+
+import aiohttp
+import urllib.parse
+
+from .errors import *
+from .models.image import Image
+from .enums import OtherEndpoints
+
+if TYPE_CHECKING:
+    from aiohttp import ClientResponse
+    from typing_extensions import Unpack
+
+    from .client import Client
+    from .models import Rankcard
+    from .enums import TextEndpoints, UserEndpoints, ImageEndpoints
+    from .types.http import (
+        Raw,
+        BatmanSlap as BatmanSlapData,
+        DistractedBf as DistractedBfData,
+        Ejected as EjectedData,
+        Stonks as StonksData,
+        WomanYellingAtCat as WomanYellingAtCatData,
+    )
+
+    Response = Coroutine[Any, Any, ClientResponse]
+    ValidEndpoint = Union[TextEndpoints, UserEndpoints, OtherEndpoints, ImageEndpoints]
+
+
+class HTTPClient:
+    BASE_URL: ClassVar[str] = "https://vacefron.nl/api"
+
+    __slots__: Tuple[str, ...] = (
+        "_client",
+        "__session",
+    )
+
+    def __init__(self, client: Client, session: Optional[aiohttp.ClientSession] = None) -> None:
+        self._client: Client = client
+        self.__session: Optional[aiohttp.ClientSession] = session
+
+    async def initiate_session(self) -> None:
+        if not self.__session or self.__session.closed:
+            self.__session = aiohttp.ClientSession()
+
+    async def request(self, endpoint: Optional[ValidEndpoint] = None, **params: Any) -> ClientResponse:
+        url = f"{self.BASE_URL}"
+        return_json = False
+        if endpoint:
+            url = f"{self.BASE_URL}{str(endpoint)}"
+        else:
+            return_json = True
+        if params:
+            encoded_param = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)  # type: ignore
+            url += f"?{str(encoded_param)}"
+
+        await self.initiate_session()
+        if not self.__session:
+            raise RuntimeError(
+                "Session is not initialized. This should never happen."
+            )  # just to get rid of the linter warning.
+
+        async with self.__session.get(url) as response:
+            if response.status == 200:
+                if return_json:
+                    return await response.json()
+                return response
+
+            elif response.status == 400:
+                raise BadRequest(await response.text())
+            elif response.status == 403:
+                raise Forbidden(await response.text())
+            elif response.status == 404:
+                raise NotFound(await response.text())
+            elif response.status == 500:
+                raise InternalServerError(await response.text())
+            else:
+                raise HTTPException(response, await response.text())
+
+    def _handle_image(self, response: ClientResponse) -> Image:
+        return Image.from_url(str(response.url), self.__session)  # type: ignore
+
+    def with_users(self, endpoint: UserEndpoints, *users: Union[str, None]) -> Response:
+        data = {}
+        if len(users) == 1 and users[0] is not None:
+            data["user"] = users[0]
+        else:
+            for i, user in enumerate(users, start=1):
+                if user is not None:
+                    data[f"user{i}"] = user
+
+        return self.request(endpoint, **data)
+
+    def with_text(self, endpoint: TextEndpoints, *texts: Union[str, None]) -> Response:
+        data = {}
+        if len(texts) == 1:
+            data["text"] = texts[0]
+        else:
+            for i, text in enumerate(texts, start=1):
+                if text:
+                    data[f"text{i}"] = text
+
+        return self.request(endpoint, **data)
+
+    def with_image(self, endpoint: ImageEndpoints, *images: Union[str, None]) -> Response:
+        data = {}
+        if len(images) == 1:
+            data["image"] = images[0]
+        else:
+            for i, image in enumerate(images, start=1):
+                if image:
+                    data[f"image{i}"] = image
+
+        return self.request(endpoint, **data)
+
+    async def rankcard(self, obj: Rankcard) -> Rankcard:
+        res = await self.request(OtherEndpoints.RANKCARD, **obj.to_dict())
+        obj._image = self._handle_image(res)
+        return obj
+
+    def batman_slap(self, **options: Unpack[BatmanSlapData]) -> Response:
+        return self.request(OtherEndpoints.BATMANSLAP, **options)
+
+    def distracted_bf(self, **options: Unpack[DistractedBfData]) -> Response:
+        return self.request(OtherEndpoints.DISTRACTEDBF, **options)
+
+    def stonks(self, **options: Unpack[StonksData]) -> Response:
+        return self.request(OtherEndpoints.STONKS, **options)
+
+    def woman_yelling_at_woman(self, **options: Unpack[WomanYellingAtCatData]) -> Response:
+        return self.request(OtherEndpoints.WOMANYELLINGATCAT, **options)
+
+    def ejected(self, **options: Unpack[EjectedData]) -> Response:
+        return self.request(OtherEndpoints.EJECTED, **options)
+
+    def base_page(self) -> Coroutine[Any, Any, Raw]:
+        return self.request()  # type: ignore
+
+    async def __get_all_endpoints(self) -> List:
+        data = await self.base_page()
+        endpoints = data["endpoints"]
+
+        class Arg(NamedTuple):
+            name: str
+            type: str
+            multiple_types: bool
+
+        class Endpoint(NamedTuple):
+            endpoint: str
+            args: List[Arg]
+
+        urls: List[str] = []
+
+        for endpoint in endpoints:
+            no_prefix = endpoint.removeprefix("GET ")
+            url = f"https://vacefron.nl/{no_prefix}"
+            urls.append(url)
+
+        def parse_args(args):
+            res: List[Arg] = []
+            parsed_args = args.replace("[", "").replace("]", "").split("&")
+            for arg in parsed_args:
+                name, value = arg.split("=")
+                values = value.split("|")
+                multiple = len(values) > 1
+
+                comp = Arg(
+                    name=name,
+                    type=value,
+                    multiple_types=multiple,
+                )
+                res.append(comp)
+
+            return res
+
+        def get_base_and_args(url: str):
+            removed_url = url.removeprefix(self.BASE_URL)
+            parsed_url = removed_url.split("?")
+            endpoint = parsed_url[0]
+            args = parsed_url[1:][0]
+            parsed_args = parse_args(args)
+            return Endpoint(endpoint=endpoint, args=parsed_args)
+
+        all_endpoints = [get_base_and_args(url) for url in urls]
+        return all_endpoints  # type: ignore
+
+    async def close(self) -> None:
+
+        if self.__session and not self.__session.closed:
+            await self.__session.close()
+
+        self.__session = None

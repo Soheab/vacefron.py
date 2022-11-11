@@ -1,12 +1,8 @@
-# noinspection PyUnresolvedReferences
-from .classes import Image, RankCard, CrewMateColors
-
-# noinspection PyUnresolvedReferences
 from .client import Client
-
-# noinspection PyUnresolvedReferences
-from .errors import BadRequest, HTTPException, InternalServerError, NotFound
+from .errors import *
+from .models import *
+from .enums import Badges, CrewmateColour
 
 __license__ = "MIT"
 __author__ = "Soheab_"
-__version__ = "1.6.3"
+__version__ = "2.0.0"

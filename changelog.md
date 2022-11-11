@@ -4,6 +4,10 @@ See here what changed or broke each version.
 
 ---
 
+## v2.0.0 - November 11, 2022
+Big rewrite with lots of changes. See the commit on GitHub for more details: https://github.com/Soheab/vacefron.py
+Might write logs later idk.
+
 ### v1.6.3 - December 12, 2021
 
 - Added support for a new endpoint: [.adios()](docs.md#await-vac_apiadiosuser). See more in the docs.
