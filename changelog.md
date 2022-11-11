@@ -10,6 +10,7 @@ Might write logs later idk.
 
 - Add support for new endpoint: `/peeposign`
 - Add fixes for `/rankcard` with badges and more.
+- Rewritten the docs to be more readable and easier to understand... i think.
 
 ### v1.6.3 - December 12, 2021
 
