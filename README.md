@@ -27,7 +27,7 @@ See the full and detailed [docs here][docs]
 
 ## Links
 
-[API][base_url] | [Changelogs][changelog] | [Examples][examples] | [Github][github] | [PyPi][pypi]
+[API][base_url] | [Changelogs][changelog] | [Github][github] | [PyPi][pypi]
 
 ## Made by
 
@@ -38,7 +38,6 @@ You can join VAC Efron's server [here][discord_vacefron] to suggest or report an
 
 [docs]: https://github.com/Soheab/vacefron.py/blob/master/docs.md
 [changelog]: https://github.com/Soheab/vacefron.py/blob/master/changelog.md
-[examples]: https://github.com/Soheab/vacefron.py/blob/master/docs.md#examples
 [base_url]: https://vacefron.nl/api/
 [github]: https://github.com/Soheab/vacefron.py
 [pypi]: https://pypi.org/project/vacefron.py/
