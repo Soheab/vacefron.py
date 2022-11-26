@@ -9,7 +9,7 @@ intents= discord.Intents.default()
 
 class Bot(commands.Bot):
     def __init__(self, **kwargs):
-        super().__init__(command_prefix="!",intents=intents, **kwargs)
+        super().__init__(command_prefix="!", intents=intents, **kwargs)
         self.vac_api= vacefron.Client()
         
 
