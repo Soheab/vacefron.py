@@ -1,8 +1,10 @@
 import discord
 from discord import app_commands
+import vacefron
 
 bot= commands.Bot(command_prefix="!", intents= discord.Intents.default())
 intents.message_content= True
+
 vacefron = vacefron.Client()
 
 
