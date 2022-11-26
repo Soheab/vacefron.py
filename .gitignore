@@ -132,6 +132,7 @@ dmypy.json
 test.py
 test.py
 test_api.py
+examples/
 
 # Visual Studio Code and other IDEs
 .idea/
