@@ -9,7 +9,7 @@ intent = discord.Intents(guilds=True, messages=True, message_content=True)
 
 class MyBot(commands.Bot):
     def __init__(self, **kwargs):
-        super().__init__(command_prefix="!", intents=intents, **kwargs)
+        super().__init__(command_prefix="!", intents=intent, **kwargs)
         self.vac_api= vacefron.Client()
         
 
