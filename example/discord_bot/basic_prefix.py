@@ -29,4 +29,4 @@ async def peposign(ctx, text: str):
   
   
   
-bot.run("")
+bot.run(...)
