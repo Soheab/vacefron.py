@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 
-intents= discord.Intents.default()
+intent = discord.Intents(guilds=True, messages=True, message_content=True)
 
 
 class MyBot(commands.Bot):
