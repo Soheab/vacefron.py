@@ -5,7 +5,7 @@ import vacefron
 from discord.ext import commands
 
 
-class Bot(commands.Bot):
+class MyBot(commands.Bot):
     def __init__(self, **kwargs):
         super().__init__(command_prefix="!",intents= discord.Intents.default(), **kwargs)
         self.vac_api= vacefron.Client()
@@ -15,7 +15,7 @@ class Bot(commands.Bot):
         await self.vac_api.close()
         await super().close()
 
-bot= Bot()   
+bot= MyBot()   
 
 @bot.tree.command()
 async def peposign(interaction: discord.Interaction, text: str):
