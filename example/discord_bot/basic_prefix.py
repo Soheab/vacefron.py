@@ -23,7 +23,6 @@ bot= Bot()
 @bot.command()
 async def peposign(ctx, text: str):
     image = await bot.vac_api.peeposign(text)
-    f =  discord.File(await image.read(), "peposign.png")
     embed= discord.Embed(title="Peposign")
     embed.set_image(url=image.url)
     await ctx.send(embed=embed)
