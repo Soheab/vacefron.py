@@ -20,7 +20,6 @@ bot= MyBot()
 @bot.tree.command()
 async def peposign(interaction: discord.Interaction, text: str):
     image = await bot.vac_api.peeposign(text)
-    f =  discord.File(await image.read(), "peposign.png")
     embed= discord.Embed(title="Peposign")
     embed.set_image(url=image.url)
     await interaction.response.send_message(embed=embed)
