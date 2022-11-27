@@ -19,7 +19,6 @@ class Bot(commands.Bot):
         await super().close()
 
 bot= Bot()   
-intents.message_content= True
 
 @bot.command()
 async def peposign(ctx, text: str):
