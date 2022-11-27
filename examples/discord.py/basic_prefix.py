@@ -18,7 +18,7 @@ class MyBot(commands.Bot):
         await self.vac_api.close()
         await super().close()
 
-bot= Bot()   
+bot= MyBot()   
 
 @bot.command()
 async def peposign(ctx, text: str):
