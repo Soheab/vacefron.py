@@ -6,8 +6,9 @@ from typing import (
     List,
     Optional,
     Tuple,
+    Union,
 )
-
+from copy import deepcopy
 
 from ..enums import Badge, UnknownBadge
 
@@ -47,9 +48,11 @@ class Rankcard:
         The colour of the XP bar as hex value. Defaults to ``None``.
     circle_avatar: :class:`bool`
         Whether the avatar should be a circle or not. Defaults to ``False``.
-    badges: List[:class:`Badges`]
+    badges: List[Union[:class:`Badgex`, :class:`UnknownBadge`]]
         The badges to add to the rankcard.
-        E.g. ``[Badges.NITRO, Badges.BOOST]``
+        E.g. ``[Badgex.NITRO, Badgex.BOOST]``
+
+        :class:`UnknownBadge` can be used to add badges that are not in the :class:`Badge` enum. ``UnknownBadge("name")`` or use ``Badge.maybe_unknown_badge("name")``.
 
         Defaults to an empty list.
 
@@ -59,14 +62,22 @@ class Rankcard:
 
     url: :class:`str`
         The full url of the rankcard.
+    all_badges: List[Union[:class:`Badgex`, :class:`UnknownBadge`]]
+        All badges that are added to the rankcard.
+    badges: List[:class:`Badgex`]
+        All valid badges supported by this library that are added to the rankcard.
     unknown_badges: List[:class:`UnknownBadge`]
-        Returns a list of unknown badges.
+        Returns a list of unknown badges that are added to the rankcard.
         
         These are badges that are not in the :class:`Badge` enum because they are possibly not added to this library yet.
         The api does nothing if unknown badges are passed to it.
 
         The objects returned have  a ``name`` attribute which is the name of the badge.
     """
+    if TYPE_CHECKING:
+        all_badges: List[Union[Badge, UnknownBadge]]
+        badges: List[Badge]
+        unknown_badges: List[UnknownBadge]
 
     FRIENDLY_ATTR_NAMES: ClassVar[Dict[str, str]] = {
         "avatar": "avatar_url",
@@ -92,6 +103,7 @@ class Rankcard:
         "text_shadow_colour",
         "xp_colour",
         "circle_avatar",
+        "all_badges",
         "badges",
         "unknown_badges",
     )
@@ -112,7 +124,7 @@ class Rankcard:
         xp_colour: Optional[str] = None,
         xp_color: Optional[str] = None,
         circle_avatar: bool = False,
-        badges: Optional[List[Badge]] = None,
+        badges: Optional[List[Union[Badge, UnknownBadge]]] = None,
     ) -> None:
         self._image: Optional[Image] = None
 
@@ -133,13 +145,76 @@ class Rankcard:
         if not badges:
             badges = []
 
-        self.badges: List[Badge] = badges
-        self.unknown_badges: List[UnknownBadge] = [badge for badge in self.badges if isinstance(badge, UnknownBadge)]
+        self._parse_badges(badges)
 
+    def _parse_badges(self, all_badges: List[Union[Badge, UnknownBadge]]) -> None:
+        badges = []
+        unknown_badges = []
+        if not all(isinstance(badge, (Badge, UnknownBadge)) for badge in all_badges):
+            raise TypeError(
+                "All badges must be either a Badge or UnknownBadge instance."
+            )
+
+        for badge in all_badges:
+            if isinstance(badge, Badge):
+                badges.append(badge)
+            else:
+                unknown_badges.append(badge)
+
+        self.all_badges = all_badges
+        self.badges = badges
+        self.unknown_badges = unknown_badges
+
+    def add_badges_from_public_flags(self, value: int, /, *, extras: Optional[List[Union[Badge, UnknownBadge]]] = None) -> None:
+        """Adds badges to the rankcard based on the public flags. See :meth:`Badge.from_public_flags` for more information.
+
+        Parameters
+        ----------
+        public_flags: :class:`int`
+            The public flags of the user.
+        extras: Optional[List[Union[:class:`Badgex`, :class:`UnknownBadge`]]]
+            Extra badges to add to the rankcard.
+        """
+        for badge in Badge.from_public_flags(value, extras=extras):
+            self.add_badge(badge)
+
+    def add_badge(self, badge: Union[str, Badge, UnknownBadge]) -> None:
+        """Adds a badge to the rankcard.
+
+        Parameters
+        ----------
+        badge: Union[:class:`Badgex`, :class:`UnknownBadge`]
+            The badge to add to the rankcard.
+        """
+        if isinstance(badge, str):
+            badge = Badge.maybe_unknown_badge(badge)
+
+        self.all_badges.append(badge)
+        if isinstance(badge, Badge):
+            self.badges.append(badge)
+        else:
+            self.unknown_badges.append(badge)
+        
+    def remove_badge(self, badge: Union[str, Badge, UnknownBadge]) -> None:
+        """Removes a badge from the rankcard.
+
+        Parameters
+        ----------
+        badge: Union[:class:`Badgex`, :class:`UnknownBadge`]
+            The badge to remove from the rankcard.
+        """
+        if isinstance(badge, str):
+            badge = Badge.maybe_unknown_badge(badge)
+
+        self.all_badges.remove(badge)
+        if isinstance(badge, Badge):
+            self.badges.remove(badge)
+        else:
+            self.unknown_badges.remove(badge)
 
     def copy(self) -> Rankcard:
-        """:class:`Rankcard`: Returns a copy of this object."""
-        inst = self.__class__.from_dict(self.to_dict())
+        """:class:`Rankcard`: Returns a deepcopy of this object."""
+        inst = deepcopy(self)
         inst._image = self._image
         return inst
 
@@ -152,8 +227,8 @@ class Rankcard:
             "nextLevelXp": self.next_level_xp,
             "previousLevelXp": self.previous_level_xp,
         }
-        if self.badges:
-            base["badges"] = "|".join(map(str, self.badges))
+        if self.all_badges:
+            base["badges"] = "|".join(map(str, self.all_badges))
 
         optional_fields = {
             "level": self.level,
@@ -188,7 +263,7 @@ class Rankcard:
             if key == "badges":
                 parsed_data[key] = list(map(Badges, value.split("|")))  # type: ignore
             else:
-                value = int(value) if hasattr(value, "isdigit") and value.isdigit() else value  # type: ignore
+                value = int(value) if str(value).isdigit() else value  # type: ignore
                 parsed_data[cls.FRIENDLY_ATTR_NAMES.get(key, key)] = value
 
         return cls(**parsed_data)
@@ -197,7 +272,7 @@ class Rankcard:
     def url(self) -> str:
         """:class:`str`: The url of the rankcard."""
         if not self._image:
-            # return unparsed url if not state
+            # return unparsed url if no state
             base = "https://vacefron.nl/api/rankcard?"
             return base + "&".join(
                 f"{key}={value}" for key, value in self.to_dict().items()

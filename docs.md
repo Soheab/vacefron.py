@@ -176,11 +176,11 @@ Returns an image of meme: "Woman Yelling At Cat".
 ---
 ## CrewmateColour
 Represents the crewmate colour. This is used in the [ejected] endpoint.
-### Attributes: `BLACK`, `BLUE`, `BROWN`, `CYAN`, `DARK_GREEN`, `LIME`, `ORANGE`, `PINK`, `PURPLE`, `RED`, `WHITE`, `YELLOW`, `RANDOM`
-## Badge
+#### Attributes: `BLACK`, `BLUE`, `BROWN`, `CYAN`, `DARK_GREEN`, `LIME`, `ORANGE`, `PINK`, `PURPLE`, `RED`, `WHITE`, `YELLOW`, `RANDOM`
+### Badge
 Represents rankcard badges. This is used in the [rankcard] endpoint.
 **Aliases**: `Badges`
-### Attributes:
+#### Attributes:
 - `ACTIVE_DEVELOPER`
 - `BOOST` // `BOOSTER` (alias)
 - `BRAVERY` // `HYPESQUAD_BRAVERY` (alias)
@@ -195,10 +195,12 @@ Represents rankcard badges. This is used in the [rankcard] endpoint.
 - `PARTNER` // `PARTNERED` (alias)
 - `SERVER_OWNER`
 - `STAFF` // `DISCORD_EMPLOYEE` (alias)
-### Methods:
-- ``.from_public_flags(flags: ``[Union]\[``ValueAttribute``, [int], [str]]``) -> ``[List]\[[Badge]] \
+#### Methods:
+- .from_public_flags(flags: [Union]\[ValueAttribute, [int], [str]], *, extras: [Optional]\[List]\[[Union]\[[Badge], ``UnknownBadge``]]] = None) -> [List]\[[Badge]] -
 Returns a list of [Badge]s from the public flags. This can be used with discord.py.
-This can also take an object with a ``.value`` attribute. \
+This can also take an object with a ``.value`` attribute. The  ``extras`` kwarg can be used to add extra badges to the output list. 
+i.e. ``Badge.NITRO`` is not included in the public flags, so you would need to add it manually.
+\
 Example:
     ```py
     from vacefron import Badge
@@ -207,7 +209,13 @@ Example:
     badges = Badge.from_public_flags(user.public_flags)
     # but prefferably:
     badges = Badge.from_public_flags(user.public_flags.value)
+
+    # does user have nitro? add it to the list via extras=
+    badges = Bagde.from_public_flags(user.public_flags.value, extras=[Badge.NITRO])
     ```
+
+- .maybe_unknown_badge(cls, value: [str]) -> [Union][[Badge], UnknownBadge] -
+Converts a string to a badge. This is useful for badges that are not supported by this library yet (e.g. new badges) but are by the API.
 
 ---
 ## Image
@@ -253,13 +261,22 @@ All are keyword-only.
         The colour of the xp bar as hex value. Defaults to `None`.
 - circle_avatar [bool] - 
         Whether the avatar should be a circle or not. Defaults to `False`.
-- badges: List[:class:`Badges`] - 
-        The badges to add to the rankcard. Defaults to an empty list.\
-        E.g. `badges=[Badges.NITRO, Badges.BOOST]`
+- badges: [List]\[[Union]\[[Badge], ``UnknownBadge``]]
+        The badges to add to the rankcard.
+        E.g. ``[Badgex.NITRO, Badgex.BOOST]``. ``UnknownBadge`` can be used to add badges that are not in the [Badge] enum. ``UnknownBadge("name")`` or use ``Badge.maybe_unknown_badge("name")``. \
+        Defaults to an empty list.
 #### Attributes:
 - .url ([str]) - The full url of the rankcard.
-- .unknown_badges ([List]\[[str]]) - Returns a list of unknown badges.
-library yet. The api does nothing if unknown badges are passed to it. 
+- all_badges: [List]\[Union]\[[Badge], ``UnknownBadge``]]
+All badges that are added to the rankcard.
+- badges: [List]\[[Badge]]
+All valid badges supported by this library that are added to the rankcard.
+- unknown_badges: [List][``UnknownBadge``]
+Returns a list of unknown badges that are added to the rankcard.
+
+These are badges that are not in the [Badge] enum because they are possibly not added to this library yet.
+The api does nothing if unknown badges are passed to it.
+
 The objects returned have  a ``name`` attribute which is the name of the badge.
 #### Methods:
 - .read(bytesio: [bool] = True) -> [Union]\[bytes, [io.BytesIO]] -
@@ -274,6 +291,15 @@ Example:
     image = await vac_api.wide("https://example.com/image.png")
     await ctx.send(file=image.file(File))
     ```
+
+- .add_badge(badge: [Union]\[[str], [Badge], ``UnknownBadge``]) -> None
+Adds a badge to the rankcard. This can be used to add badges that are not in the [Badge] enum.
+
+- .remove_badge(badge: [Union]\[[str], [Badge], ``UnknownBadge``]) -> None
+Removes a badge from the rankcard. This can be used to remove badges that are not in the [Badge] enum.
+
+- .add_badges_from_public_flags(public_flags: [int], /, *, extras: [Optional]\[List]\[Union]\[[Badge], ``UnknownBadge``]]] = None) -> None -
+Adds badges from a user's public flags. The ``extras`` parameter can be used to add badges that are not included in the public flags like nitro. See [Badge].from_public_flags for more info.
 #### Example:
 ```py
 from vacefron import Rankcard

@@ -8,8 +8,11 @@ See here what changed or broke each version.
 
 - Added support for following badges: `ACTIVE_DEVELOPER, BALANCE, CERTIFIED_MODERATOR, SERVER_OWNER`.
 - Added lots of aliases for badges.
-- Added `.from_public_flags()` to `Badge` class. See more in the docs.
 - Renamed `Badges` to `Badge` and aliases `Badges` to `Badge`.
+- Added `.from_public_flags()` and `.maybe_unknonw_badge()` to `Badge` class. See more in the docs.
+- Rankcard changes:
+ - Added the following attributues: `all_badges`, `badges`, `unknown_bages`. See more in the docs.
+ - Added following methods: `add_badge`, `remove_badge` and `add_badges_from_public_flags`. See more in the docs.
 
 ## v2.0.1 - November 12, 2022
 

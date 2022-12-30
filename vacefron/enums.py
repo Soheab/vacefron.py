@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Tuple, TYPE_CHECKING, List, Union, NamedTuple
+from typing import Optional, Tuple, TYPE_CHECKING, List, Union, NamedTuple
 
 from enum import Enum
 
@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from typing import Protocol
 
     class ValueAttribute(Protocol):
+        
         value: Union[str, int]
 
 
@@ -36,20 +37,32 @@ class CrewmateColour(_BaseEnum):
     YELLOW = 12
     RANDOM = 13
 
+class UnknownEnum(NamedTuple):
+    """Represents an unknown enum value.
+    
+    This is used when an enum is not known to the library.
+    """
+    value: Union[str, int]
 
-class UnknownBadge(NamedTuple):
+    @property
+    def name(self) -> str:
+        return str(self.value)
+
+    def __str__(self) -> str:
+        return str(self.value)
+
+
+class UnknownBadge(UnknownEnum):
     """Represents an unknown badge.
     
     This is used when a badge is not known to the library.
     """
-    flag_name: str
 
     @property
     def name(self) -> str:
-        return self.flag_name.lower().replace("_", "").replace("hypersquad", "")
+        name = super().name
+        return name.lower().replace("_", "").replace("hypersquad", "")
 
-    def __str__(self) -> str:
-        return self.name
 
 class Badge(_BaseEnum):
     ACTIVE_DEVELOPER = "activedeveloper"
@@ -80,22 +93,53 @@ class Badge(_BaseEnum):
     VERIFIED_BOT_DEVELOPER = DEVELOPER
 
     @classmethod
-    def from_public_flags(cls, value: Union[ValueAttribute, str, int], /) -> List[Union[Badge, UnknownBadge]]:
+    def from_public_flags(cls, value: Union[ValueAttribute, str, int], /, *, extras: Optional[List[Union[Badge, UnknownBadge]]] = None) -> List[Union[Badge, UnknownBadge]]:
+        """Converts a public flags value to a list of badges. More info: https://discord.com/developers/docs/resources/user#user-object-user-flags
+
+        Examples
+        --------
+        .. code-block:: python3
+            from vacefron import Badge
+
+            # discord.py: <user>.public_flags -> <discord.PublicUserFlags> can be passed to this method
+            badges = Badge.from_public_flags(131072)
+            print(badges)
+            # [<Badge.DEVELOPER: 'developer'>]
+
+        Parameters
+        ----------
+        value: Union[ValueAttribute, str, int]
+            The public flags value to convert. This can be either a class with a ``value`` attribute, a string or an integer.
+            This is usually returned from the user endpoint as ``public_flags`` (https://discord.com/developers/docs/resources/user#user-object).
+        extras: Optional[List[Union[Badge, UnknownBadge]]]
+            A list of extra badges to add to the list. i.e. ``Badge.NITRO`` is not included in the public flags, so you would need to add it manually.
+        
+        Returns
+        -------
+        List[Union[Badge, UnknownBadge]]
+            A list of badges. If a badge is not known to the library, it will be returned as an :class:`UnknownBadge`.
+        """
         _value = value.value if not isinstance(value, (str, int)) else value
         if not isinstance(_value, int):
             raise TypeError(f"Expected int, got {type(_value)}")
 
-        def try_convert_cls(flag_name: str) -> Union[Badge, UnknownBadge]:
-            try:
-                return cls[flag_name]
-            except KeyError:
-                return UnknownBadge(flag_name)
-
-        return [
-            try_convert_cls(flag.name)
+        res = [
+            cls.maybe_unknown_badge(flag.name)
             for flag in DiscordPublicUserFlags.__members__.values()
             if (_value & flag.value) == flag.value
         ]
+        if extras:
+            res.extend(extras)
+        return res
+
+
+    @classmethod
+    def maybe_unknown_badge(cls, value: str) -> Union[Badge, UnknownBadge]:
+        """Converts a string to a badge. This is useful for badges that are not supported by this library yet (e.g. new badges) but are by the API."""
+        try:
+            return cls[value]
+        except KeyError:
+            return UnknownBadge(value)
 
 
 Badges = Badge
@@ -104,6 +148,8 @@ Badges = Badge
 __all__: Tuple[str, ...] = (
     "CrewmateColour",
     "Badge",
+    "UnknownBadge",
+    "Badges",
 )
 
 # discord api docs - https://discord.com/developers/docs/resources/user#user-object-user-flags
