@@ -46,10 +46,10 @@ _KEYWORDS = [
     "leveling",
 ]
 _URLS = {
-        "Discord": "https://discord.gg/xJ2HRxZ",
-        "Documentation": f"{_GITHUB_URL}/blob/master/docs.md",
-        "Issue tracker": f"{_GITHUB_URL}/issues",
-    }
+    "Discord": "https://discord.gg/xJ2HRxZ",
+    "Documentation": f"{_GITHUB_URL}/blob/master/docs.md",
+    "Issue tracker": f"{_GITHUB_URL}/issues",
+}
 _PACKAGES = [
     "vacefron",
     "vacefron.types",

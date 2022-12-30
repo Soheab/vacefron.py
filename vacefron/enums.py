@@ -1,12 +1,15 @@
 from typing import Tuple
 from enum import Enum
 
+
 class _BaseEnum(Enum):
     def __str__(self) -> str:
-        return self.value if isinstance(self.value, str) else ''
-    
+        return self.value if isinstance(self.value, str) else ""
+
     def __int__(self) -> int:
         return self.value if isinstance(self.value, int) else 0
+
+
 class CrewmateColour(_BaseEnum):
     BLACK = 1
     BLUE = 2
@@ -22,6 +25,7 @@ class CrewmateColour(_BaseEnum):
     WHITE = 11
     YELLOW = 12
     RANDOM = 13
+
 
 class Badges(_BaseEnum):
     BOOST = "boost"
@@ -40,6 +44,7 @@ __all__: Tuple[str, ...] = (
     "CrewmateColour",
     "Badges",
 )
+
 
 class AllEndpoints(_BaseEnum):
     ADIOS = "/adios"
@@ -87,6 +92,7 @@ class UserEndpoints(_BaseEnum):
     HEAVEN = "/heaven"
     TABLEFLIP = "/tableflip"
     WOLVERINE = "/wolverine"
+
 
 class ImageEndpoints(_BaseEnum):
     WIDE = "/wide"
