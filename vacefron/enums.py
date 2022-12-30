@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from typing import Protocol
 
     class ValueAttribute(Protocol):
-        
+
         value: Union[str, int]
 
 
@@ -37,11 +37,13 @@ class CrewmateColour(_BaseEnum):
     YELLOW = 12
     RANDOM = 13
 
+
 class UnknownEnum(NamedTuple):
     """Represents an unknown enum value.
-    
+
     This is used when an enum is not known to the library.
     """
+
     value: Union[str, int]
 
     @property
@@ -54,7 +56,7 @@ class UnknownEnum(NamedTuple):
 
 class UnknownBadge(UnknownEnum):
     """Represents an unknown badge.
-    
+
     This is used when a badge is not known to the library.
     """
 
@@ -93,7 +95,9 @@ class Badge(_BaseEnum):
     VERIFIED_BOT_DEVELOPER = DEVELOPER
 
     @classmethod
-    def from_public_flags(cls, value: Union[ValueAttribute, str, int], /, *, extras: Optional[List[Union[Badge, UnknownBadge]]] = None) -> List[Union[Badge, UnknownBadge]]:
+    def from_public_flags(
+        cls, value: Union[ValueAttribute, str, int], /, *, extras: Optional[List[Union[Badge, UnknownBadge]]] = None
+    ) -> List[Union[Badge, UnknownBadge]]:
         """Converts a public flags value to a list of badges. More info: https://discord.com/developers/docs/resources/user#user-object-user-flags
 
         Examples
@@ -113,7 +117,7 @@ class Badge(_BaseEnum):
             This is usually returned from the user endpoint as ``public_flags`` (https://discord.com/developers/docs/resources/user#user-object).
         extras: Optional[List[Union[Badge, UnknownBadge]]]
             A list of extra badges to add to the list. i.e. ``Badge.NITRO`` is not included in the public flags, so you would need to add it manually.
-        
+
         Returns
         -------
         List[Union[Badge, UnknownBadge]]
@@ -131,7 +135,6 @@ class Badge(_BaseEnum):
         if extras:
             res.extend(extras)
         return res
-
 
     @classmethod
     def maybe_unknown_badge(cls, value: str) -> Union[Badge, UnknownBadge]:

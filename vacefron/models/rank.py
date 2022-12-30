@@ -68,12 +68,13 @@ class Rankcard:
         All valid badges supported by this library that are added to the rankcard.
     unknown_badges: List[:class:`UnknownBadge`]
         Returns a list of unknown badges that are added to the rankcard.
-        
+
         These are badges that are not in the :class:`Badge` enum because they are possibly not added to this library yet.
         The api does nothing if unknown badges are passed to it.
 
         The objects returned have  a ``name`` attribute which is the name of the badge.
     """
+
     if TYPE_CHECKING:
         all_badges: List[Union[Badge, UnknownBadge]]
         badges: List[Badge]
@@ -151,9 +152,7 @@ class Rankcard:
         badges = []
         unknown_badges = []
         if not all(isinstance(badge, (Badge, UnknownBadge)) for badge in all_badges):
-            raise TypeError(
-                "All badges must be either a Badge or UnknownBadge instance."
-            )
+            raise TypeError("All badges must be either a Badge or UnknownBadge instance.")
 
         for badge in all_badges:
             if isinstance(badge, Badge):
@@ -165,7 +164,9 @@ class Rankcard:
         self.badges = badges
         self.unknown_badges = unknown_badges
 
-    def add_badges_from_public_flags(self, value: int, /, *, extras: Optional[List[Union[Badge, UnknownBadge]]] = None) -> None:
+    def add_badges_from_public_flags(
+        self, value: int, /, *, extras: Optional[List[Union[Badge, UnknownBadge]]] = None
+    ) -> None:
         """Adds badges to the rankcard based on the public flags. See :meth:`Badge.from_public_flags` for more information.
 
         Parameters
@@ -194,7 +195,7 @@ class Rankcard:
             self.badges.append(badge)
         else:
             self.unknown_badges.append(badge)
-        
+
     def remove_badge(self, badge: Union[str, Badge, UnknownBadge]) -> None:
         """Removes a badge from the rankcard.
 
@@ -274,9 +275,7 @@ class Rankcard:
         if not self._image:
             # return unparsed url if no state
             base = "https://vacefron.nl/api/rankcard?"
-            return base + "&".join(
-                f"{key}={value}" for key, value in self.to_dict().items()
-            )
+            return base + "&".join(f"{key}={value}" for key, value in self.to_dict().items())
 
         return self._image.url
 
@@ -288,17 +287,13 @@ class Rankcard:
         async def read(self, bytesio: bool = False):
             if not self._image:
                 raise RuntimeError(
-                    (
-                        "No session was set. Did you construct this object yourself and not pass it to Client.rankcard? "
-                    )
+                    ("No session was set. Did you construct this object yourself and not pass it to Client.rankcard? ")
                 )
             return await self._image.read(bytesio=bytesio)
 
         async def file(self, cls, filename: str = "image.png"):
             if not self._image:
                 raise RuntimeError(
-                    (
-                        "No session was set. Did you construct this object yourself and not pass it to Client.rankcard? "
-                    )
+                    ("No session was set. Did you construct this object yourself and not pass it to Client.rankcard? ")
                 )
             return await self._image.file(cls, filename=filename)
