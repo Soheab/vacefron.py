@@ -7,7 +7,7 @@ class _BaseEnum(Enum):
     
     def __int__(self) -> int:
         return self.value if isinstance(self.value, int) else 0
-class CrewmateColour(Enum):
+class CrewmateColour(_BaseEnum):
     BLACK = 1
     BLUE = 2
     BROWN = 3
