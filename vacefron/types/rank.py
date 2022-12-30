@@ -1,12 +1,8 @@
-from typing import TYPE_CHECKING, TypedDict, Literal
+from typing import TYPE_CHECKING, TypedDict, List
 
 if TYPE_CHECKING:
     from typing_extensions import NotRequired
 
-
-Badges = Literal[
-    "boost", "bravery", "brilliance", "bughunter", "developer", "earlysupporter", "events", "nitro", "partner", "staff"
-]
 
 
 class Rankcard(TypedDict, total=False):
@@ -21,4 +17,4 @@ class Rankcard(TypedDict, total=False):
     textShadowColor: NotRequired[str]
     xpColor: NotRequired[str]
     circleAvatar: NotRequired[bool]
-    badges: NotRequired[Badges]
+    badges: NotRequired[List[str]]

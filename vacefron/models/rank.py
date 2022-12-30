@@ -9,7 +9,7 @@ from typing import (
 )
 
 
-from ..enums import Badges
+from ..enums import Badge, UnknownBadge
 
 if TYPE_CHECKING:
     from .image import Image
@@ -52,6 +52,20 @@ class Rankcard:
         E.g. ``[Badges.NITRO, Badges.BOOST]``
 
         Defaults to an empty list.
+
+    Attributes
+    ----------
+    Every parameter is also an attribute.
+
+    url: :class:`str`
+        The full url of the rankcard.
+    unknown_badges: List[:class:`UnknownBadge`]
+        Returns a list of unknown badges.
+        
+        These are badges that are not in the :class:`Badge` enum because they are possibly not added to this library yet.
+        The api does nothing if unknown badges are passed to it.
+
+        The objects returned have  a ``name`` attribute which is the name of the badge.
     """
 
     FRIENDLY_ATTR_NAMES: ClassVar[Dict[str, str]] = {
@@ -79,6 +93,7 @@ class Rankcard:
         "xp_colour",
         "circle_avatar",
         "badges",
+        "unknown_badges",
     )
 
     def __init__(
@@ -97,7 +112,7 @@ class Rankcard:
         xp_colour: Optional[str] = None,
         xp_color: Optional[str] = None,
         circle_avatar: bool = False,
-        badges: List[Badges] = [],
+        badges: Optional[List[Badge]] = None,
     ) -> None:
         self._image: Optional[Image] = None
 
@@ -115,7 +130,12 @@ class Rankcard:
         self.rank: Optional[int] = rank
         self.background: Optional[str] = background
         self.circle_avatar: bool = circle_avatar
-        self.badges: List[Badges] = badges
+        if not badges:
+            badges = []
+
+        self.badges: List[Badge] = badges
+        self.unknown_badges: List[UnknownBadge] = [badge for badge in self.badges if isinstance(badge, UnknownBadge)]
+
 
     def copy(self) -> Rankcard:
         """:class:`Rankcard`: Returns a copy of this object."""
@@ -179,7 +199,9 @@ class Rankcard:
         if not self._image:
             # return unparsed url if not state
             base = "https://vacefron.nl/api/rankcard?"
-            return base + "&".join(f"{key}={value}" for key, value in self.to_dict().items())
+            return base + "&".join(
+                f"{key}={value}" for key, value in self.to_dict().items()
+            )
 
         return self._image.url
 
@@ -191,13 +213,17 @@ class Rankcard:
         async def read(self, bytesio: bool = False):
             if not self._image:
                 raise RuntimeError(
-                    ("No session was set. Did you construct this object yourself and not pass it to Client.rankcard? ")
+                    (
+                        "No session was set. Did you construct this object yourself and not pass it to Client.rankcard? "
+                    )
                 )
             return await self._image.read(bytesio=bytesio)
 
         async def file(self, cls, filename: str = "image.png"):
             if not self._image:
                 raise RuntimeError(
-                    ("No session was set. Did you construct this object yourself and not pass it to Client.rankcard? ")
+                    (
+                        "No session was set. Did you construct this object yourself and not pass it to Client.rankcard? "
+                    )
                 )
             return await self._image.file(cls, filename=filename)

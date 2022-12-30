@@ -6,8 +6,10 @@ See here what changed or broke each version.
 
 ## v2.0.2 - December 30, 2022
 
-- Added support for following new badges: ACTIVE_DEVELOPER, CERTIFIED_MODERATOR and SERVER_OWNER.
-- Added alias `Badge` to `Badges`.
+- Added support for following badges: `ACTIVE_DEVELOPER, BALANCE, CERTIFIED_MODERATOR, SERVER_OWNER`.
+- Added lots of aliases for badges.
+- Added `.from_public_flags()` to `Badge` class. See more in the docs.
+- Renamed `Badges` to `Badge` and aliases `Badges` to `Badge`.
 
 ## v2.0.1 - November 12, 2022
 

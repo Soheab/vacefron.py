@@ -176,10 +176,38 @@ Returns an image of meme: "Woman Yelling At Cat".
 ---
 ## CrewmateColour
 Represents the crewmate colour. This is used in the [ejected] endpoint.
-#### Attributes: `BLACK`, `BLUE`, `BROWN`, `CYAN`, `DARK_GREEN`, `LIME`, `ORANGE`, `PINK`, `PURPLE`, `RED`, `WHITE`, `YELLOW`, `RANDOM`
-## Badges
+### Attributes: `BLACK`, `BLUE`, `BROWN`, `CYAN`, `DARK_GREEN`, `LIME`, `ORANGE`, `PINK`, `PURPLE`, `RED`, `WHITE`, `YELLOW`, `RANDOM`
+## Badge
 Represents rankcard badges. This is used in the [rankcard] endpoint.
-#### Attributes: `BOOST`, `BRAVERY`, `BRILLIANCE`, `BUG_HUNTER`, `DEVELOPER`, `EARLY_SUPPORTER`, `EVENTS`, `NITRO`, `PARTNER`, `STAFF`
+**Aliases**: `Badges`
+### Attributes:
+- `ACTIVE_DEVELOPER`
+- `BOOST` // `BOOSTER` (alias)
+- `BRAVERY` // `HYPESQUAD_BRAVERY` (alias)
+- `BALANCE` // `HYPESQUAD_BALANCE` (alias)
+- `BRILLIANCE` // `HYPESQUAD_BRILLIANCE` (alias)
+- `BUG_HUNTER`
+- `CERTIFIED_MODERATOR` // `DISCORD_CERTIFIED_MODERATOR` (alias)
+- `DEVELOPER` // `EARLY_VERIFIED_BOT_DEVELOPER` (alias) // `VERIFIED_BOT_DEVELOPER` (alias)
+- `EARLY_SUPPORTER`
+- `EVENTS` // `HYPESQUAD_EVENTS` (alias)
+- `NITRO`
+- `PARTNER` // `PARTNERED` (alias)
+- `SERVER_OWNER`
+- `STAFF` // `DISCORD_EMPLOYEE` (alias)
+### Methods:
+- ``.from_public_flags(flags: ``[Union]\[``ValueAttribute``, [int], [str]]``) -> ``[List]\[[Badge]] \
+Returns a list of [Badge]s from the public flags. This can be used with discord.py.
+This can also take an object with a ``.value`` attribute. \
+Example:
+    ```py
+    from vacefron import Badge
+
+    user = ctx.author # or any other user object like interaction.user
+    badges = Badge.from_public_flags(user.public_flags)
+    # but prefferably:
+    badges = Badge.from_public_flags(user.public_flags.value)
+    ```
 
 ---
 ## Image
@@ -230,6 +258,9 @@ All are keyword-only.
         E.g. `badges=[Badges.NITRO, Badges.BOOST]`
 #### Attributes:
 - .url ([str]) - The full url of the rankcard.
+- .unknown_badges ([List]\[[str]]) - Returns a list of unknown badges.
+library yet. The api does nothing if unknown badges are passed to it. 
+The objects returned have  a ``name`` attribute which is the name of the badge.
 #### Methods:
 - .read(bytesio: [bool] = True) -> [Union]\[bytes, [io.BytesIO]] -
 Returns the image in bytes or BytesIO.
@@ -267,9 +298,10 @@ print(card.name, card.url)
 [discord.py]: https://github.com/Rapptz/discord.py
 [io.BytesIO]: https://docs.python.org/3/library/io.html#binary-i-o
 [Union]: https://docs.python.org/3/library/typing.html#typing.Union
+[List]: https://docs.python.org/3/library/stdtypes.html#list
 [tuple]: https://docs.python.org/3/library/stdtypes.html?highlight=tuple#tuple
 [Image]: #image-1
-[Badges]: #badges
+[Badge]: #badge
 [Rankcard]: #rankcard-1
 [CrewmateColour]: #crewmatecolour
 [ejected]: #await-vac_apiejectedname-str-crewmate-unionstr-int-crewmatecolour-impostor-bool--false---image
