@@ -1,7 +1,6 @@
 from __future__ import annotations
 from typing import Tuple, TYPE_CHECKING, List, Union, NamedTuple
 
-
 from enum import Enum
 
 if TYPE_CHECKING:
@@ -21,7 +20,7 @@ class _BaseEnum(Enum):
         return self.value if isinstance(self.value, int) else 0
 
 
-class CrewmateColour(Enum):
+class CrewmateColour(_BaseEnum):
     BLACK = 1
     BLUE = 2
     BROWN = 3

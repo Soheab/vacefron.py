@@ -5,7 +5,18 @@ if TYPE_CHECKING:
     from typing_extensions import NotRequired
 
 CrewMate = Literal[
-    "black", "blue", "brown", "cyan", "darkgreen", "lime", "orange", "pink", "purple", "red", "white", "yellow"
+    "black",
+    "blue",
+    "brown",
+    "cyan",
+    "darkgreen",
+    "lime",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "white",
+    "yellow",
 ]
 
 

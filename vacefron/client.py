@@ -352,7 +352,12 @@ class Client:
     # Other
 
     async def batman_slap(
-        self, text: str, text2: str, *, batman: Optional[str] = None, robin: Optional[str] = None
+        self,
+        text: str,
+        text2: str,
+        *,
+        batman: Optional[str] = None,
+        robin: Optional[str] = None,
     ) -> Image:
         """Returns an image of meme: "batman slap"
 

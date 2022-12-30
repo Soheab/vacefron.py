@@ -58,9 +58,7 @@ class HTTPClient:
         await self.initiate_session()
         # Gets rid of the linter warning.
         if not self.__session:
-            raise RuntimeError(
-                "Session is not initialized. This should never happen."
-            )
+            raise RuntimeError("Session is not initialized. This should never happen.")
 
         async with self.__session.get(url) as response:
             if response.status == 200:
@@ -82,16 +80,14 @@ class HTTPClient:
     def _handle_image(self, response: ClientResponse) -> Image:
         # Gets rid of the linter warning.
         if not self.__session:
-            raise RuntimeError(
-                "Session is not initialized. This should never happen."
-            )
+            raise RuntimeError("Session is not initialized. This should never happen.")
 
         return Image(str(response.url), self.__session)
 
     def with_users(self, endpoint: UserEndpoints, *users: Union[str, None]) -> Response:
         if len(users) == 1:
             return self.request(endpoint, user=users[0])
-        
+
         payload = {}
         for i, user in enumerate(users, start=1):
             if user is not None:
@@ -102,7 +98,7 @@ class HTTPClient:
     def with_text(self, endpoint: TextEndpoints, *texts: Union[str, None]) -> Response:
         if len(texts) == 1:
             return self.request(endpoint, text=texts[0])
-        
+
         payload = {}
         for i, text in enumerate(texts, start=1):
             if text is not None:
@@ -113,7 +109,7 @@ class HTTPClient:
     def with_image(self, endpoint: ImageEndpoints, *images: Union[str, None]) -> Response:
         if len(images) == 1:
             return self.request(endpoint, image=images[0])
-        
+
         payload = {}
         for i, image in enumerate(images, start=1):
             if image is not None:

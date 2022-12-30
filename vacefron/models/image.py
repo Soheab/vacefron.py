@@ -32,11 +32,11 @@ class Image:
         return self.url
 
     @overload
-    async def read(self, bytesio: Literal[True]) -> BytesIO:
+    async def read(self, bytesio: Literal[True] = ...) -> BytesIO:
         ...
 
     @overload
-    async def read(self, bytesio: Literal[False]) -> bytes:
+    async def read(self, bytesio: Literal[False] = ...) -> bytes:
         ...
 
     async def read(self, bytesio: bool = True) -> Union[bytes, BytesIO]:
