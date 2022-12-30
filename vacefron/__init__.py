@@ -5,4 +5,4 @@ from .enums import Badges, CrewmateColour
 
 __license__ = "MLP-2.0"
 __author__ = "Soheab"
-__version__ = "2.0.1"
+__version__ = "2.0.2"
