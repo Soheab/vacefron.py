@@ -32,11 +32,11 @@ class Image:
         return self.url
 
     @overload
-    async def read(self, bytesio: Literal[True]) -> BytesIO:
+    async def read(self, bytesio: Literal[True] = ...) -> BytesIO:
         ...
 
     @overload
-    async def read(self, bytesio: Literal[False]) -> bytes:
+    async def read(self, bytesio: Literal[False] = ...) -> bytes:
         ...
 
     async def read(self, bytesio: bool = True) -> Union[bytes, BytesIO]:
@@ -46,7 +46,9 @@ class Image:
             else:
                 return await response.read()
 
-    async def file(self, cls: FileLike, filename: str = "image.png", **kwargs) -> FileLike:
+    async def file(
+        self, cls: FileLike, filename: str = "image.png", **kwargs
+    ) -> FileLike:
         """Converts the image to a file-like object.
 
         Parameters
