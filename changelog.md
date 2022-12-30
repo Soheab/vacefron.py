@@ -4,6 +4,11 @@ See here what changed or broke each version.
 
 ---
 
+## v2.0.2 - December 30, 2022
+
+- Added support for following new badges: ACTIVE_DEVELOPER, CERTIFIED_MODERATOR and SERVER_OWNER.
+- Added alias `Badge` to `Badges`.
+
 ## v2.0.1 - November 12, 2022
 
 - Fix a bug where /models and /types weren't in the package
