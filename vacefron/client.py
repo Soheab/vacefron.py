@@ -438,7 +438,7 @@ class Client:
         """
         impostor = impostor or imposter
         val = crewmate  # type: ignore
-        if val is not CrewmateColour:
+        if not isinstance(crewmate, CrewmateColour):
             try:
                 if isinstance(crewmate, str):
                     val = CrewmateColour[str(crewmate.upper())]
@@ -447,10 +447,11 @@ class Client:
             except (KeyError, ValueError):
                 pass
             else:
-                val = choose(list(CrewmateColour))
+                # [:-1] to remove the random option
+                val = choose(list(CrewmateColour)[:-1])
 
         val: CrewmateColour
-        response = await self.__http.ejected(name=name, impostor=imposter, crewmate=val.value)
+        response = await self.__http.ejected(name=name, impostor=imposter, crewmate=val.name.lower())  # type: ignore
         return self.__http._handle_image(response)
 
     async def woman_yelling_at_cat(self, woman: str, cat: str) -> Image:
