@@ -4,6 +4,11 @@ See here what changed or broke each version.
 
 ---
 
+## v2.0.3 - January 5, 2023
+
+- Fixed a bug where tbe `crewmate` value in `ejected` was never set to the correct value.
+- Added an alias called `CrewmateColor` for `CrewmateColour` enum.
+
 ## v2.0.2 - December 30, 2022
 
 - Added support for following badges: `ACTIVE_DEVELOPER, BALANCE, CERTIFIED_MODERATOR, SERVER_OWNER`.

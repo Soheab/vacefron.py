@@ -176,6 +176,7 @@ Returns an image of meme: "Woman Yelling At Cat".
 ---
 ## CrewmateColour
 Represents the crewmate colour. This is used in the [ejected] endpoint.
+**Aliases**: `CrewmateColor`
 #### Attributes: `BLACK`, `BLUE`, `BROWN`, `CYAN`, `DARK_GREEN`, `LIME`, `ORANGE`, `PINK`, `PURPLE`, `RED`, `WHITE`, `YELLOW`, `RANDOM`
 ### Badge
 Represents rankcard badges. This is used in the [rankcard] endpoint.
