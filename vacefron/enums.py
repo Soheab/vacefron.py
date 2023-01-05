@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 class _BaseEnum(Enum):
     def __str__(self) -> str:
-        return self.value if isinstance(self.value, str) else ""
+        return self.value if isinstance(self.value, str) else self.name
 
     def __int__(self) -> int:
         return self.value if isinstance(self.value, int) else 0
@@ -36,6 +36,9 @@ class CrewmateColour(_BaseEnum):
     WHITE = 11
     YELLOW = 12
     RANDOM = 13
+
+# aliases
+CrewmateColor = CrewmateColour
 
 
 class UnknownEnum(NamedTuple):
@@ -145,11 +148,13 @@ class Badge(_BaseEnum):
             return UnknownBadge(value)
 
 
+# aliases
 Badges = Badge
 
 
 __all__: Tuple[str, ...] = (
     "CrewmateColour",
+    "CrewmateColor",
     "Badge",
     "UnknownBadge",
     "Badges",
